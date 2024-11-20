@@ -15,10 +15,11 @@ public class RestartLvl : MonoBehaviour
         
     }
 
-    public void RestartLevel()
+    public static void RestartLevel()
     {
         moveorb.ResetMVValues();
         GM.ResetGMValues();
+        BlockSpawner.ResetBSValues();
         SceneManager.LoadScene("lvl1");
     }
 }

@@ -11,7 +11,7 @@ public class DeleteCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GetComponent<Rigidbody>().linearVelocity = new Vector3(GM.HorizVel, GM.VertVel, moveorb.Speed+2);
+        GetComponent<Rigidbody>().linearVelocity = new Vector3(GM.HorizVel, GM.VertVel, moveorb.Speed);
     }
     private void OnCollisionEnter(Collision collision)
     {

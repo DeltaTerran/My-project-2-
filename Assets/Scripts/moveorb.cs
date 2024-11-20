@@ -67,8 +67,9 @@ public class moveorb : MonoBehaviour
         }
         if (Input.GetKeyDown(MoveDown) && _controlLocked == "n")
         {
-            Player.GetComponent<CapsuleCollider>().center = new Vector3 (0,0,0);
-            Debug.Log(Player.GetComponent<CapsuleCollider>().height);
+            //Debug.Log(Player.GetComponent<CapsuleCollider>().height);
+            //Player.GetComponent<CapsuleCollider>().center = new Vector3 (0,0,0);
+            //Debug.Log(Player.GetComponent<CapsuleCollider>().height);
             //Player.localScale = new Vector3(1, 0.25f, 1);
             //Player.position = new Vector3(Player.position.x, 0.65f, Player.position.z);
 
@@ -150,9 +151,9 @@ public class moveorb : MonoBehaviour
     IEnumerator StopRoll ()
     {
         yield return new WaitForSeconds(.9f);
-        Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
-        //Player.localScale = new Vector3(1,1,1);
-        Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
+        //Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
+        ////Player.localScale = new Vector3(1,1,1);
+        //Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
         _controlLocked = "n";
     }
     public static void ResetMVValues()
