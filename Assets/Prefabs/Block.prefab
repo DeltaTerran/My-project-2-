@@ -112,9 +112,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obsticleObj_Big:
-  - {fileID: 0}
+  - {fileID: 2222111361404534124, guid: 88f2fd29f58b9734683512546acec310, type: 3}
   - {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
-  - {fileID: 0}
+  - {fileID: 2807449429036958551, guid: f0c16f0ea935ea64297ca1d4d55d9746, type: 3}
   obsticleObj_Upper:
   - {fileID: 5484791874973271364, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
   obsticleObj:
@@ -166,9 +166,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obsticleObj_Big:
-  - {fileID: 0}
+  - {fileID: 2222111361404534124, guid: 88f2fd29f58b9734683512546acec310, type: 3}
   - {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
-  - {fileID: 0}
+  - {fileID: 2807449429036958551, guid: f0c16f0ea935ea64297ca1d4d55d9746, type: 3}
   obsticleObj_Upper:
   - {fileID: 5484791874973271364, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
   obsticleObj:
@@ -220,9 +220,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obsticleObj_Big:
-  - {fileID: 0}
+  - {fileID: 2222111361404534124, guid: 88f2fd29f58b9734683512546acec310, type: 3}
   - {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
-  - {fileID: 0}
+  - {fileID: 2807449429036958551, guid: f0c16f0ea935ea64297ca1d4d55d9746, type: 3}
   obsticleObj_Upper:
   - {fileID: 5484791874973271364, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
   obsticleObj:
@@ -251,7 +251,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4213793193239988448, guid: 82f2d75403eaa1348a9ec2e9da6698d2, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4213793193239988448, guid: 82f2d75403eaa1348a9ec2e9da6698d2, type: 3}
       propertyPath: m_LocalRotation.w

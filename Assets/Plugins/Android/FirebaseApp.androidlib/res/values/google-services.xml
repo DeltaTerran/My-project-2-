@@ -1,0 +1,9 @@
+<?xml version='1.0' encoding='utf-8'?>
+<resources xmlns:tools="http://schemas.android.com/tools" tools:keep="@string/gcm_defaultSenderId,@string/google_storage_bucket,@string/project_id,@string/google_api_key,@string/google_crash_reporting_api_key,@string/google_app_id">
+  <string name="gcm_defaultSenderId" translatable="false">1003052871859</string>
+  <string name="google_storage_bucket" translatable="false">deltazerg-1a06b.firebasestorage.app</string>
+  <string name="project_id" translatable="false">deltazerg-1a06b</string>
+  <string name="google_api_key" translatable="false">AIzaSyD0QjKy-08-8N3XCDrbx85C93smfzkMr7Q</string>
+  <string name="google_crash_reporting_api_key" translatable="false">AIzaSyD0QjKy-08-8N3XCDrbx85C93smfzkMr7Q</string>
+  <string name="google_app_id" translatable="false">1:1003052871859:android:5dc95111019f2904b540c6</string>
+</resources>

@@ -667,6 +667,22 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 508670616822137599, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
+      propertyPath: 'obsticleObj_Big.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2222111361404534124, guid: 88f2fd29f58b9734683512546acec310, type: 3}
+    - target: {fileID: 508670616822137599, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
+      propertyPath: 'obsticleObj_Big.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2807449429036958551, guid: f0c16f0ea935ea64297ca1d4d55d9746, type: 3}
+    - target: {fileID: 1291961034924019271, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
+      propertyPath: 'obsticleObj_Big.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2222111361404534124, guid: 88f2fd29f58b9734683512546acec310, type: 3}
+    - target: {fileID: 1291961034924019271, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
+      propertyPath: 'obsticleObj_Big.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2807449429036958551, guid: f0c16f0ea935ea64297ca1d4d55d9746, type: 3}
     - target: {fileID: 1738602627014926482, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
       propertyPath: Block
       value: 
@@ -675,6 +691,18 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlockGM
       objectReference: {fileID: 0}
+    - target: {fileID: 2640426705622108293, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5539996833089951881, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
+      propertyPath: 'obsticleObj_Big.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2222111361404534124, guid: 88f2fd29f58b9734683512546acec310, type: 3}
+    - target: {fileID: 5539996833089951881, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
+      propertyPath: 'obsticleObj_Big.Array.data[2]'
+      value: 
+      objectReference: {fileID: 2807449429036958551, guid: f0c16f0ea935ea64297ca1d4d55d9746, type: 3}
     - target: {fileID: 6102536930719273941, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -718,6 +746,14 @@ PrefabInstance:
     - target: {fileID: 6306048605644929532, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
       propertyPath: m_Name
       value: Block
+      objectReference: {fileID: 0}
+    - target: {fileID: 6710613660490624181, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8568239196680780678, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1563,6 +1599,7 @@ GameObject:
   m_Component:
   - component: {fileID: 528339369}
   - component: {fileID: 528339368}
+  - component: {fileID: 528339370}
   m_Layer: 0
   m_Name: GM
   m_TagString: Untagged
@@ -1606,6 +1643,18 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &528339370
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 528339367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eab90c91e747d624cad3bf719b832e0d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &595981680
 GameObject:
   m_ObjectHideFlags: 0
