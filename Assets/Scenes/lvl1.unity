@@ -683,18 +683,6 @@ PrefabInstance:
       propertyPath: 'obsticleObj_Big.Array.data[2]'
       value: 
       objectReference: {fileID: 2807449429036958551, guid: f0c16f0ea935ea64297ca1d4d55d9746, type: 3}
-    - target: {fileID: 1738602627014926482, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
-      propertyPath: Block
-      value: 
-      objectReference: {fileID: 6102536930719273941, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
-    - target: {fileID: 2165951459981278945, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
-      propertyPath: m_Name
-      value: BlockGM
-      objectReference: {fileID: 0}
-    - target: {fileID: 2640426705622108293, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 5539996833089951881, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
       propertyPath: 'obsticleObj_Big.Array.data[0]'
       value: 
@@ -746,14 +734,6 @@ PrefabInstance:
     - target: {fileID: 6306048605644929532, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
       propertyPath: m_Name
       value: Block
-      objectReference: {fileID: 0}
-    - target: {fileID: 6710613660490624181, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8568239196680780678, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
