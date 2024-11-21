@@ -1583,8 +1583,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   waittoload: 0
-  ZScenePos_Plat: 4
-  ZScenePos_OBST: 10
   bbNoPit: {fileID: 851424616557013642, guid: 1730973524d31544db51d9b8c4798cd0, type: 3}
   bbPitMid: {fileID: 6491917269144247304, guid: 40c78acd2638c104b85779aa5ff5fa50, type: 3}
   coinObj: {fileID: 111896440707501637, guid: 01f695bc66e8653458d9bffd6b8ffc99, type: 3}
@@ -1592,7 +1590,7 @@ MonoBehaviour:
   obsticleObj_Big: {fileID: 8727389539175366018, guid: 3086766ab435ca642b186eed00baf45e, type: 3}
   obsticleObj_Upper: {fileID: 164229527966305243, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
   PowerUp: {fileID: 3566134787513529276, guid: 7f43339193cb66744a5eddb519ad18a3, type: 3}
-  randNum: 0
+  RandNum: 0
 --- !u!4 &528339369
 Transform:
   m_ObjectHideFlags: 0
@@ -1992,9 +1990,9 @@ GameObject:
   - component: {fileID: 738803590}
   - component: {fileID: 738803589}
   - component: {fileID: 738803588}
-  - component: {fileID: 738803587}
   - component: {fileID: 738803586}
   - component: {fileID: 738803591}
+  - component: {fileID: 738803592}
   m_Layer: 0
   m_Name: Destroyer
   m_TagString: Untagged
@@ -2014,29 +2012,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b7b22f1b4f590a6468fa088a97623235, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!136 &738803587
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 738803585}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2
-  m_Direction: 1
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!23 &738803588
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -2099,7 +2074,7 @@ Transform:
   m_GameObject: {fileID: 738803585}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -20}
+  m_LocalPosition: {x: 0, y: 1.5, z: -64}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -2130,8 +2105,29 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 80
+  m_Constraints: 112
   m_CollisionDetection: 0
+--- !u!65 &738803592
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738803585}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 5, y: 8, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &832575517
 GameObject:
   m_ObjectHideFlags: 0

@@ -67,6 +67,60 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Block: {fileID: 6102536930719273941}
+--- !u!1 &2640426705622108293
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3384706562493418383}
+  - component: {fileID: 508670616822137599}
+  m_Layer: 0
+  m_Name: Obsticle2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3384706562493418383
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2640426705622108293}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 16}
+  m_LocalScale: {x: 1, y: 1, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6102536930719273941}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &508670616822137599
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2640426705622108293}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94750583850d825498edeff8285d742b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obsticleObj_Big:
+  - {fileID: 0}
+  - {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
+  - {fileID: 0}
+  obsticleObj_Upper:
+  - {fileID: 5484791874973271364, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
+  obsticleObj:
+  - {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
+  - {fileID: 1576488453971893466, guid: a778b631c6253a04899cb31bad047c81, type: 3}
+  - {fileID: 3696538847673496218, guid: 20ba95ee93fc7894d871c2c692ab7418, type: 3}
 --- !u!1 &6710613660490624181
 GameObject:
   m_ObjectHideFlags: 0
@@ -76,7 +130,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2897009360725168773}
-  - component: {fileID: 8892077500875063874}
+  - component: {fileID: 5539996833089951881}
   m_Layer: 0
   m_Name: Obsticle
   m_TagString: Untagged
@@ -99,7 +153,7 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6102536930719273941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8892077500875063874
+--- !u!114 &5539996833089951881
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -111,10 +165,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 94750583850d825498edeff8285d742b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obsticleObj_Big: {fileID: 8727389539175366018, guid: 3086766ab435ca642b186eed00baf45e, type: 3}
-  obsticleObj_Upper: {fileID: 164229527966305243, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
-  obsticleObj: {fileID: 575782495771802912, guid: 046393580c011a446af517dd20222dce, type: 3}
---- !u!1 &7555456443365369139
+  obsticleObj_Big:
+  - {fileID: 0}
+  - {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
+  - {fileID: 0}
+  obsticleObj_Upper:
+  - {fileID: 5484791874973271364, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
+  obsticleObj:
+  - {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
+  - {fileID: 1576488453971893466, guid: a778b631c6253a04899cb31bad047c81, type: 3}
+  - {fileID: 3696538847673496218, guid: 20ba95ee93fc7894d871c2c692ab7418, type: 3}
+--- !u!1 &8568239196680780678
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -122,8 +183,8 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 2334824518302915943}
-  - component: {fileID: 5786555116425665855}
+  - component: {fileID: 6522559006000984654}
+  - component: {fileID: 1291961034924019271}
   m_Layer: 0
   m_Name: Obsticle3
   m_TagString: Untagged
@@ -131,13 +192,13 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &2334824518302915943
+--- !u!4 &6522559006000984654
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7555456443365369139}
+  m_GameObject: {fileID: 8568239196680780678}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 1, z: 24}
@@ -146,68 +207,28 @@ Transform:
   m_Children: []
   m_Father: {fileID: 6102536930719273941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5786555116425665855
+--- !u!114 &1291961034924019271
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7555456443365369139}
+  m_GameObject: {fileID: 8568239196680780678}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94750583850d825498edeff8285d742b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  obsticleObj_Big: {fileID: 8727389539175366018, guid: 3086766ab435ca642b186eed00baf45e, type: 3}
-  obsticleObj_Upper: {fileID: 164229527966305243, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
-  obsticleObj: {fileID: 575782495771802912, guid: 046393580c011a446af517dd20222dce, type: 3}
---- !u!1 &8876159299233022784
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1422589875387775251}
-  - component: {fileID: 6896735731795374766}
-  m_Layer: 0
-  m_Name: Obsticle2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1422589875387775251
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8876159299233022784}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 16}
-  m_LocalScale: {x: 1, y: 1, z: 0.5}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6102536930719273941}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6896735731795374766
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8876159299233022784}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94750583850d825498edeff8285d742b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obsticleObj_Big: {fileID: 8727389539175366018, guid: 3086766ab435ca642b186eed00baf45e, type: 3}
-  obsticleObj_Upper: {fileID: 164229527966305243, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
-  obsticleObj: {fileID: 575782495771802912, guid: 046393580c011a446af517dd20222dce, type: 3}
+  obsticleObj_Big:
+  - {fileID: 0}
+  - {fileID: 4661435515762455780, guid: e289bf5debb17f6459818c207d781953, type: 3}
+  - {fileID: 0}
+  obsticleObj_Upper:
+  - {fileID: 5484791874973271364, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
+  obsticleObj:
+  - {fileID: 8783306491908617939, guid: f02116c209ecd9e488fc4d2cd8996133, type: 3}
+  - {fileID: 1576488453971893466, guid: a778b631c6253a04899cb31bad047c81, type: 3}
+  - {fileID: 3696538847673496218, guid: 20ba95ee93fc7894d871c2c692ab7418, type: 3}
 --- !u!1001 &7983465508391279413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -274,10 +295,10 @@ PrefabInstance:
       addedObject: {fileID: 2897009360725168773}
     - targetCorrespondingSourceObject: {fileID: 4213793193239988448, guid: 82f2d75403eaa1348a9ec2e9da6698d2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1422589875387775251}
+      addedObject: {fileID: 3384706562493418383}
     - targetCorrespondingSourceObject: {fileID: 4213793193239988448, guid: 82f2d75403eaa1348a9ec2e9da6698d2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 2334824518302915943}
+      addedObject: {fileID: 6522559006000984654}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82f2d75403eaa1348a9ec2e9da6698d2, type: 3}
 --- !u!4 &6102536930719273941 stripped
