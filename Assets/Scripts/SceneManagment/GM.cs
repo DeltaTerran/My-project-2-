@@ -128,7 +128,7 @@ public class GM : MonoBehaviour
         }
         if (waittoload > 2)
         {
-            SceneManager.LoadScene("LevelComp");
+            SceneManager.LoadScene("Outro");
         }
     }
     public static void ResetGMValues()
