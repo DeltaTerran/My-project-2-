@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 
 public class moveorb : MonoBehaviour
 {
+    public GameObject ColliderStanding, ColliderSliding;
     public KeyCode MoveL;
     public KeyCode MoveR;
     public KeyCode MoveUp;
@@ -70,7 +71,6 @@ public class moveorb : MonoBehaviour
             //Debug.Log(Player.GetComponent<CapsuleCollider>().height);
             Player.GetComponent<CapsuleCollider>().height = 1;
             Player.GetComponent<CapsuleCollider>().center = Vector3.zero;
-            Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
             //Debug.Log(Player.GetComponent<CapsuleCollider>().height);
             //Player.localScale = new Vector3(1, 0.25f, 1);
             //Player.position = new Vector3(Player.position.x, 0.65f, Player.position.z);
