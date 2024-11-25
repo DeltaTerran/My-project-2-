@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 3
   tags:
   - Lethal
+  - Button
   layers:
   - Default
   - TransparentFX

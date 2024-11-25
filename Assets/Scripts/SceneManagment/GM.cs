@@ -1,4 +1,5 @@
 using System;
+using Firebase.Auth;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -8,6 +9,7 @@ public class GM : MonoBehaviour
     [SerializeField] private GameObject _pauseUI, _inGameUI;
     [SerializeField] private TMP_Text _gameT, _pauseT;
     private bool _isPaused;
+    private FirebaseAuth auth;
 
     public static float VertVel = 0;
     public static float HorizVel = 0;
@@ -31,15 +33,29 @@ public class GM : MonoBehaviour
     {
         Score += Time.deltaTime*4;
         _gameT.text = $"Score: {Convert.ToInt32(Score)}";
-        if (_isPaused)
+        //Код для определения нажата кнопка или нет
+        if (Input.GetMouseButtonDown(0))
         {
-            if (Input.GetKeyDown(KeyCode.Mouse0))
+            RaycastHit raycastHit;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out raycastHit, 100f))
             {
-                Unpause();
+                if (raycastHit.transform != null)
+                {
+                    //Our custom method. 
+                    CurrentClickedGameObject(raycastHit.transform.gameObject);
+                }
             }
         }
-        
-        
+        //if (_isPaused)
+        //{
+        //    if (Input.GetKeyDown(KeyCode.Mouse0))
+        //    {
+        //        Unpause();
+        //    }
+        //}
+
+
         if (LvlCompStatus == "Fail")
         {
             waittoload += Time.deltaTime;
@@ -57,6 +73,13 @@ public class GM : MonoBehaviour
         Score = 0;
         ZVelAdj = 0;
         LvlCompStatus = "";
+    }
+    public void CurrentClickedGameObject(GameObject gameObject)
+    {
+        if (gameObject.tag != "Button")
+        {
+            Unpause();
+        }
     }
     void Pause()
     {
@@ -89,7 +112,21 @@ public class GM : MonoBehaviour
     }
     public void QuitButton()
     {
+        Application.Quit();
+    }
+    public void SignOutButton()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
+        if (auth != null)
+        {
+            auth.SignOut();
+            Debug.Log("Пользователь вышел из аккаунта.");
 
+        }
+        else
+        {
+            Debug.LogWarning("FirebaseAuth не инициализирован.");
+        }
     }
     #endregion
 }
