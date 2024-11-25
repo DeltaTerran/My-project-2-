@@ -1,127 +1,45 @@
+using System;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class GM : MonoBehaviour
 {
+    [SerializeField] private GameObject _pauseUI, _inGameUI;
+    [SerializeField] private TMP_Text _gameT, _pauseT;
+    private bool _isPaused;
+
     public static float VertVel = 0;
     public static float HorizVel = 0;
-    public static int CoinTotal = 0;
-    public static float TimeTotal = 0;
+    //public static int CoinTotal = 0;
+    public static float Score = 0;
     public float waittoload = 0;
 
     public static float ZVelAdj = 1;
-    //public float ZScenePos_Plat = 0;
-    //public float ZScenePos_OBST = 30;
 
     public static string LvlCompStatus = "";
-
-    public Transform bbNoPit; 
-    public Transform bbPitMid;
-
-    public Transform coinObj;
-    public Transform obsticleObj;
-    public Transform obsticleObj_Big;
-    public Transform obsticleObj_Upper;
-    public Transform PowerUp;
-
     public int RandNum;
 
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        
+        Pause();
 
     }
 
     // Update is called once per frame
     void Update()
     {
-
-
-        #region Текущий спавн
-        #region Platform Spawn
-        //if (ZScenePos_Plat < 1000)
-        //{
-        //    Instantiate(bbNoPit, new Vector3(0, 0, ZScenePos_Plat), bbNoPit.rotation);
-        //    ZScenePos_Plat += 4;
-        //}
-        #endregion
-        /*
-        if (ZScenePos_OBST < 1000)
+        Score += Time.deltaTime*4;
+        _gameT.text = $"Score: {Convert.ToInt32(Score)}";
+        if (_isPaused)
         {
-            #region without coins
-            randNum = Random.Range(0, 11);
-                    //switch (randNum)
-                    //{
-                    //    case 0:
-                    //        Instantiate(obsticleObj_Big, new Vector3(1, 1.1f, ZScenePos_OBST), obsticleObj_Big.rotation);
-                    //        Instantiate(obsticleObj_Big, new Vector3(0, 1.1f, ZScenePos_OBST), obsticleObj_Big.rotation);
-                    //        Instantiate(obsticleObj, new Vector3(-1, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        break;
-                    //    case 1:
-                    //        Instantiate(obsticleObj, new Vector3(1, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        Instantiate(obsticleObj, new Vector3(0, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        Instantiate(obsticleObj_Upper, new Vector3(-1, 2.5f, ZScenePos_OBST), obsticleObj_Upper.rotation);
-
-                    //        break;
-                    //    case 2:
-                    //        Instantiate(obsticleObj, new Vector3(1, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        Instantiate(obsticleObj, new Vector3(0, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        Instantiate(obsticleObj_Big, new Vector3(-1, 1.1f, ZScenePos_OBST), obsticleObj_Big.rotation);
-                    //        break;
-                    //    case 3:
-                    //        Instantiate(obsticleObj, new Vector3(1, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        Instantiate(obsticleObj_Upper, new Vector3(0, 2.5f, ZScenePos_OBST), obsticleObj_Upper.rotation);
-                    //        Instantiate(obsticleObj, new Vector3(-1, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        break;
-                    //    case 4:
-                    //        Instantiate(obsticleObj, new Vector3(1, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        Instantiate(obsticleObj_Big, new Vector3(0, 1.1f, ZScenePos_OBST), obsticleObj_Big.rotation);
-                    //        Instantiate(obsticleObj, new Vector3(-1, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        break;
-                    //    case 5:
-                    //        Instantiate(obsticleObj, new Vector3(1, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        Instantiate(obsticleObj_Upper, new Vector3(0, 2.5f, ZScenePos_OBST), obsticleObj_Upper.rotation);
-                    //        Instantiate(obsticleObj_Upper, new Vector3(-1, 2.5f, ZScenePos_OBST), obsticleObj_Upper.rotation);
-                    //        break;
-                    //    case 6:
-                    //        Instantiate(obsticleObj, new Vector3(1, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        Instantiate(obsticleObj_Upper, new Vector3(0, 2.5f, ZScenePos_OBST), obsticleObj_Upper.rotation);
-                    //        Instantiate(obsticleObj_Big, new Vector3(-1, 1.1f, ZScenePos_OBST), obsticleObj_Big.rotation);
-                    //        break;
-                    //    case 7:
-                    //        Instantiate(obsticleObj, new Vector3(1, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        Instantiate(obsticleObj_Big, new Vector3(0, 1.1f, ZScenePos_OBST), obsticleObj_Big.rotation);
-                    //        Instantiate(obsticleObj_Big, new Vector3(-1, 1.1f, ZScenePos_OBST), obsticleObj_Big.rotation); break;
-                    //    case 8:
-                    //        Instantiate(obsticleObj_Upper, new Vector3(1, 2.5f, ZScenePos_OBST), obsticleObj_Upper.rotation);
-                    //        Instantiate(obsticleObj, new Vector3(0, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        Instantiate(obsticleObj, new Vector3(-1, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        break;
-                    //    case 9:
-                    //        Instantiate(obsticleObj_Big, new Vector3(1, 1.1f, ZScenePos_OBST), obsticleObj_Big.rotation);
-                    //        Instantiate(obsticleObj, new Vector3(0, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        Instantiate(obsticleObj, new Vector3(-1, 1.1f, ZScenePos_OBST), obsticleObj.rotation); break;
-                    //    case 10:
-                    //        Instantiate(obsticleObj, new Vector3(1, 1.1f, ZScenePos_OBST), obsticleObj.rotation);
-                    //        Instantiate(obsticleObj_Upper, new Vector3(0, 2.5f, ZScenePos_OBST), obsticleObj_Upper.rotation);
-                    //        Instantiate(obsticleObj, new Vector3(-1, 1.1f, ZScenePos_OBST), obsticleObj.rotation); break;
-                    //    case 11:
-                    //        Instantiate(obsticleObj_Big, new Vector3(1, 1.1f, ZScenePos_OBST), obsticleObj_Big.rotation);
-                    //        Instantiate(obsticleObj_Big, new Vector3(0, 1.1f, ZScenePos_OBST), obsticleObj_Big.rotation);
-                    //        Instantiate(obsticleObj, new Vector3(-1, 1.1f, ZScenePos_OBST), obsticleObj.rotation); 
-                    //        break;
-
-                    //}
-            #endregion
-            
-            ZScenePos_OBST += 20;
+            if (Input.GetKeyDown(KeyCode.Mouse0))
+            {
+                Unpause();
+            }
         }
-        */
-        #endregion
         
-        TimeTotal += Time.deltaTime;
-
+        
         if (LvlCompStatus == "Fail")
         {
             waittoload += Time.deltaTime;
@@ -135,9 +53,43 @@ public class GM : MonoBehaviour
     {
         VertVel = 0;
         HorizVel = 0;
-        CoinTotal = 0;
-        TimeTotal = 0;
+        //CoinTotal = 0;
+        Score = 0;
         ZVelAdj = 0;
         LvlCompStatus = "";
     }
+    void Pause()
+    {
+        Time.timeScale = 0;
+        _isPaused = true;
+        if (_isPaused)
+        {
+            _pauseT.text = _gameT.text;
+            _pauseUI.SetActive(true);
+            _inGameUI.SetActive(false);
+            
+        }
+    }
+    void Unpause()
+    {
+        _isPaused = false;
+        Time.timeScale = 1;
+        if (!_isPaused)
+        {
+            _pauseUI.SetActive(false);
+            _inGameUI.SetActive(true);
+        }
+    }
+
+    #region Buttons
+    public void PauseButton()
+    {
+        Pause();
+        
+    }
+    public void QuitButton()
+    {
+
+    }
+    #endregion
 }

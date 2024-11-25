@@ -16,13 +16,13 @@ public class Stats : MonoBehaviour
         {
             GetComponent<TextMeshPro>().text = GM.LvlCompStatus;
         }
-        if (gameObject.name == "CoinsTxt")
-        {
-            GetComponent<TextMeshPro>().text = "Coins : " + GM.CoinTotal;
-        }
+        //if (gameObject.name == "CoinsTxt")
+        //{
+        //    GetComponent<TextMeshPro>().text = "Coins : " + GM.CoinTotal;
+        //}
         if (gameObject.name == "TimeTxt")
         {
-            GetComponent<TextMeshPro>().text = "Time : " + GM.TimeTotal;
+            GetComponent<TextMeshPro>().text = "Time : " + GM.Score;
         }
         
     }

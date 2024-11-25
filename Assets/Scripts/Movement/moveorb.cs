@@ -1,15 +1,16 @@
 using System;
 using System.Collections;
+using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class moveorb : MonoBehaviour
 {
-    public GameObject ColliderStanding, ColliderSliding;
     public KeyCode MoveL;
     public KeyCode MoveR;
     public KeyCode MoveUp;
     public KeyCode MoveDown;
+    
 
     private int LaneNum = 2;
     //public float HorizVel = 0;
@@ -28,8 +29,6 @@ public class moveorb : MonoBehaviour
     void Start()
     {
         // mover.GetComponent<Rigidbody>();
-        
-
     }
 
     // Update is called once per frame
@@ -45,6 +44,8 @@ public class moveorb : MonoBehaviour
             // Wait for seconds - .5f
             //GM.HorizVel = -2;
             // Wait for seconds - .25f
+
+
             GM.HorizVel = -4;
             StartCoroutine(stopSlide());
             LaneNum -= 1;
@@ -52,9 +53,13 @@ public class moveorb : MonoBehaviour
         }
         if (Input.GetKeyDown(MoveR) && LaneNum < 3 && _controlLocked == "n")
         {
+
+
             // Wait for seconds - .5f
             //GM.HorizVel = 2;
             // Wait for seconds - .25f
+
+
             GM.HorizVel = 4;
             StartCoroutine(stopSlide());
             LaneNum += 1;
@@ -68,13 +73,11 @@ public class moveorb : MonoBehaviour
         }
         if (Input.GetKeyDown(MoveDown) && _controlLocked == "n")
         {
-            //Debug.Log(Player.GetComponent<CapsuleCollider>().height);
             Player.GetComponent<CapsuleCollider>().height = 1;
-            Player.GetComponent<CapsuleCollider>().center = Vector3.zero;
-            //Debug.Log(Player.GetComponent<CapsuleCollider>().height);
-            //Player.localScale = new Vector3(1, 0.25f, 1);
-            //Player.position = new Vector3(Player.position.x, 0.65f, Player.position.z);
+            Player.GetComponent<CapsuleCollider>().center = new Vector3(0,0.5f, 0);
+            Debug.Log(Player.GetComponent<CapsuleCollider>().height);
 
+            
             StartCoroutine(StopRoll());
         }
     }
@@ -103,6 +106,8 @@ public class moveorb : MonoBehaviour
             Instantiate(boomObj, transform.position, boomObj.rotation);
             GM.LvlCompStatus = "Fail";
         }
+
+        //Old Sistem
         //if (other.gameObject.name == "PowerUp(Clone)")
         //{
         //    Destroy(other.gameObject);
@@ -110,6 +115,8 @@ public class moveorb : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+
+        //Old Sistem
         //if (other.gameObject.name == "rampbottomtrig")
         //{
         //    GM.VertVel = 1.5f;
@@ -118,11 +125,16 @@ public class moveorb : MonoBehaviour
         //{
         //    GM.VertVel = 0;
         //}
+
+
         if (other.gameObject.name == "exit")
         {
             GM.LvlCompStatus = "Sucess";
             SceneManager.LoadScene("LevelComp");
         }
+
+
+        //Old Sistem
         //if (other.gameObject.name == "coin(Clone)")
         //{
         //    Destroy(other.gameObject);
@@ -153,10 +165,13 @@ public class moveorb : MonoBehaviour
     IEnumerator StopRoll ()
     {
         yield return new WaitForSeconds(.9f);
+        //ColliderSliding.SetActive(false);
+        //ColliderStanding.SetActive(true);
+
         //Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
         ////Player.localScale = new Vector3(1,1,1);
         Player.GetComponent<CapsuleCollider>().height = 2;
-        Player.GetComponent<CapsuleCollider>().center = new Vector3(0,1,0);
+        Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
         _controlLocked = "n";
     }
     public static void ResetMVValues()
