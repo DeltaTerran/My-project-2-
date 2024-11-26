@@ -1,29 +1,31 @@
 using System;
 using Firebase.Auth;
+using Firebase.Database;
+using Firebase.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.SocialPlatforms.Impl;
 
 public class GM : MonoBehaviour
 {
-    [SerializeField] private GameObject _pauseUI, _inGameUI;
-    [SerializeField] private TMP_Text _gameT, _pauseT;
+    [SerializeField] private GameObject _pauseUI, _gameUI, _outroUI;
+    [SerializeField] private TMP_Text _gameT, _pauseT, _outroT;
     private bool _isPaused;
-    private FirebaseAuth auth;
 
     public static float VertVel = 0;
     public static float HorizVel = 0;
     //public static int CoinTotal = 0;
     public static float Score = 0;
     public float waittoload = 0;
-
+    bool _addedtoLB = false;
     public static float ZVelAdj = 1;
 
     public static string LvlCompStatus = "";
     public int RandNum;
-
     void Start()
     {
+        
         Pause();
 
     }
@@ -60,9 +62,23 @@ public class GM : MonoBehaviour
         {
             waittoload += Time.deltaTime;
         }
-        if (waittoload > 2)
+        if (waittoload > 0.5f)
         {
-            SceneManager.LoadScene("Outro");
+            //SceneManager.LoadScene("Outro");
+            _isPaused = true;
+            Time.timeScale = 0;
+            _outroUI.SetActive(true);
+            _gameUI.SetActive(false);
+            _outroT.text = _gameT.text;
+            if (FirebaseManager.Instance.Auth != null && _addedtoLB == false)
+            {
+                FirebaseManager.Instance.AddPlayerToLeaderboard(FirebaseManager.Instance.Auth.CurrentUser.UserId,
+                    FirebaseManager.Instance.Auth.CurrentUser.DisplayName,
+                    Convert.ToInt32(Score));
+                // FirebaseManager.Instance.AddPlayerToLeaderboard("user123", "TestPlayer", 100);
+                _addedtoLB = true;
+            }
+            
         }
     }
     public static void ResetGMValues()
@@ -89,7 +105,7 @@ public class GM : MonoBehaviour
         {
             _pauseT.text = _gameT.text;
             _pauseUI.SetActive(true);
-            _inGameUI.SetActive(false);
+            _gameUI.SetActive(false);
             
         }
     }
@@ -100,7 +116,7 @@ public class GM : MonoBehaviour
         if (!_isPaused)
         {
             _pauseUI.SetActive(false);
-            _inGameUI.SetActive(true);
+            _gameUI.SetActive(true);
         }
     }
 
@@ -112,14 +128,15 @@ public class GM : MonoBehaviour
     }
     public void QuitButton()
     {
-        Application.Quit();
+        Debug.Log(FirebaseManager.Instance.Auth.CurrentUser.DisplayName);
+        //Application.Quit();
     }
     public void SignOutButton()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
-        if (auth != null)
+        
+        if (FirebaseManager.Instance.Auth != null)
         {
-            auth.SignOut();
+            FirebaseManager.Instance.Auth.SignOut();
             Debug.Log("Пользователь вышел из аккаунта.");
 
         }
@@ -127,6 +144,9 @@ public class GM : MonoBehaviour
         {
             Debug.LogWarning("FirebaseAuth не инициализирован.");
         }
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
+    
+    }
+    
     #endregion
-}

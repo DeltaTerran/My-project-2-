@@ -14,7 +14,7 @@ public class Authorization : MonoBehaviour
     GameObject _autorization, _registration;
     [SerializeField]
     TMP_InputField _usernamefield, _emailfield, _passwordfield, _conformpassword;
-    private FirebaseAuth auth;
+    public FirebaseAuth Auth;
     private DatabaseReference _databaseReference;
 
     void Start()
@@ -24,7 +24,7 @@ public class Authorization : MonoBehaviour
             var dependencyStatus = task.Result;
             if (dependencyStatus== DependencyStatus.Available)
             {
-                auth = FirebaseAuth.DefaultInstance;
+                Auth = FirebaseAuth.DefaultInstance;
                 _databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
                 //Debug.Log("Firebase Auth инициализирован!");
             }
@@ -41,7 +41,7 @@ public class Authorization : MonoBehaviour
         string password = _passwordfield.text;
         string conformpassword = _conformpassword.text;
 
-        auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
+        Auth.CreateUserWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (password != conformpassword)
             {
@@ -107,7 +107,7 @@ public class Authorization : MonoBehaviour
         string email = _emailfield.text;
         string password = _passwordfield.text;
 
-        auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
+        Auth.SignInWithEmailAndPasswordAsync(email, password).ContinueWithOnMainThread(task =>
         {
             if (task.IsCanceled)
             {

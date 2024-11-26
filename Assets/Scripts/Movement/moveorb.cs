@@ -3,9 +3,13 @@ using System.Collections;
 using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using TMPro;
 
 public class moveorb : MonoBehaviour
 {
+
+    //[SerializeField]
+    //private TMP_Text _gScore, _oScore;
     public KeyCode MoveL;
     public KeyCode MoveR;
     public KeyCode MoveUp;

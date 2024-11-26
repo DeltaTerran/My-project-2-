@@ -439,7 +439,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 85946092}
-  - component: {fileID: 85946091}
+  - component: {fileID: 85946093}
   m_Layer: 0
   m_Name: RegistrationMenu
   m_TagString: Untagged
@@ -447,24 +447,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 0
---- !u!114 &85946091
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 85946090}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3610d9a7d77aa7c40a00725ffa8a6898, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _autorization: {fileID: 554877851}
-  _registration: {fileID: 85946090}
-  _usernamefield: {fileID: 182668115}
-  _emailfield: {fileID: 380917271}
-  _passwordfield: {fileID: 1517546636}
-  _conformpassword: {fileID: 646992814}
 --- !u!4 &85946092
 Transform:
   m_ObjectHideFlags: 0
@@ -481,6 +463,24 @@ Transform:
   - {fileID: 721032415}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &85946093
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 85946090}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7dc8f514c0424e4bacfcdadf871c922, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _autorization: {fileID: 554877851}
+  _registration: {fileID: 85946090}
+  _usernamefield: {fileID: 182668115}
+  _emailfield: {fileID: 380917271}
+  _passwordfield: {fileID: 1517546636}
+  _conformpassword: {fileID: 646992814}
 --- !u!1 &93118660
 GameObject:
   m_ObjectHideFlags: 0
@@ -975,6 +975,50 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!1 &284774505
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 284774507}
+  - component: {fileID: 284774506}
+  m_Layer: 0
+  m_Name: FirebaseManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &284774506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284774505}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: abb99b4a9085efd40aaba6844409545c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &284774507
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 284774505}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &294794611
 GameObject:
   m_ObjectHideFlags: 0
@@ -1588,15 +1632,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 554877852}
-  - component: {fileID: 554877854}
-  - component: {fileID: 554877853}
+  - component: {fileID: 554877855}
   m_Layer: 0
   m_Name: AuthorizationMenu
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &554877852
 Transform:
   m_ObjectHideFlags: 0
@@ -1613,7 +1656,7 @@ Transform:
   - {fileID: 1780036806}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &554877853
+--- !u!114 &554877855
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1622,27 +1665,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 554877851}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3610d9a7d77aa7c40a00725ffa8a6898, type: 3}
+  m_Script: {fileID: 11500000, guid: b7dc8f514c0424e4bacfcdadf871c922, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _autorization: {fileID: 554877851}
   _registration: {fileID: 85946090}
-  _usernamefield: {fileID: 182668115}
+  _usernamefield: {fileID: 1548993883}
   _emailfield: {fileID: 1548993883}
   _passwordfield: {fileID: 2112196920}
-  _conformpassword: {fileID: 646992814}
---- !u!114 &554877854
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 554877851}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eab90c91e747d624cad3bf719b832e0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  _conformpassword: {fileID: 2112196920}
 --- !u!1 &594791301
 GameObject:
   m_ObjectHideFlags: 0
@@ -2876,8 +2907,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 85946091}
-        m_TargetAssemblyTypeName: Authorization, Assembly-CSharp
+      - m_Target: {fileID: 85946093}
+        m_TargetAssemblyTypeName: AuthFB, Assembly-CSharp
         m_MethodName: GoBackButton
         m_Mode: 1
         m_Arguments:
@@ -3287,8 +3318,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 554877853}
-        m_TargetAssemblyTypeName: Authorization, Assembly-CSharp
+      - m_Target: {fileID: 554877855}
+        m_TargetAssemblyTypeName: AuthFB, Assembly-CSharp
         m_MethodName: LoginUser
         m_Mode: 1
         m_Arguments:
@@ -4717,8 +4748,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 85946091}
-        m_TargetAssemblyTypeName: RegistrationWindow, Assembly-CSharp
+      - m_Target: {fileID: 85946093}
+        m_TargetAssemblyTypeName: AuthFB, Assembly-CSharp
         m_MethodName: RegisterUser
         m_Mode: 1
         m_Arguments:
@@ -5575,8 +5606,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 554877853}
-        m_TargetAssemblyTypeName: Authorization, Assembly-CSharp
+      - m_Target: {fileID: 554877855}
+        m_TargetAssemblyTypeName: AuthTest, Assembly-CSharp
         m_MethodName: RegistrationButton
         m_Mode: 1
         m_Arguments:
@@ -5814,3 +5845,4 @@ SceneRoots:
   - {fileID: 294794614}
   - {fileID: 85946092}
   - {fileID: 554877852}
+  - {fileID: 284774507}
