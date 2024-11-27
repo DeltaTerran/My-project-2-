@@ -759,7 +759,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 571960282}
         m_TargetAssemblyTypeName: RestartLvl, Assembly-CSharp
-        m_MethodName: RestartLevel
+        m_MethodName: Reborn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

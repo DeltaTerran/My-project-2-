@@ -117,6 +117,7 @@ public class GM : MonoBehaviour
         {
             _pauseUI.SetActive(false);
             _gameUI.SetActive(true);
+            _leaderboardUI.SetActive(false);
         }
     }
 
@@ -150,6 +151,11 @@ public class GM : MonoBehaviour
     {
         _pauseUI.SetActive(false);
         _leaderboardUI.SetActive(true);
+    }
+    public void BoBackFromLeaderBoardButton()
+    {
+        _leaderboardUI.SetActive(false);
+        _pauseUI.SetActive(true);
     }
 }
     
