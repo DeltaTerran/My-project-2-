@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Block: {fileID: 6102536930719273941}
---- !u!1 &3800803229699783972
+--- !u!1 &3896033206140851983
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -75,98 +75,48 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 7465873687083817845}
-  - component: {fileID: 5598235040785033492}
+  - component: {fileID: 1183573528744703720}
+  - component: {fileID: 4585471662385789050}
   m_Layer: 0
-  m_Name: Obsticle (2)
+  m_Name: Obsticle3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &7465873687083817845
+--- !u!4 &1183573528744703720
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3800803229699783972}
+  m_GameObject: {fileID: 3896033206140851983}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 8}
+  m_LocalPosition: {x: 0, y: 1, z: 24}
   m_LocalScale: {x: 1, y: 1, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6102536930719273941}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &5598235040785033492
+--- !u!114 &4585471662385789050
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3800803229699783972}
+  m_GameObject: {fileID: 3896033206140851983}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 94750583850d825498edeff8285d742b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   obsticleObj_Big:
-  - {fileID: 3983286879074464541, guid: 3086766ab435ca642b186eed00baf45e, type: 3}
+  - {fileID: 4348615989577734762, guid: 04da6abb50edfa94b995247c49cc22b4, type: 3}
   obsticleObj_Upper:
-  - {fileID: 5484791874973271364, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
+  - {fileID: 1421979491773691230, guid: 549fdbadd7f488e4cb987ad256824900, type: 3}
   obsticleObj:
-  - {fileID: 5307219366594048959, guid: 046393580c011a446af517dd20222dce, type: 3}
---- !u!1 &6403299520270033953
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1913206360341684992}
-  - component: {fileID: 7130804939372395484}
-  m_Layer: 0
-  m_Name: Obsticle (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1913206360341684992
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6403299520270033953}
-  serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: 8}
-  m_LocalScale: {x: 1, y: 1, z: 0.5}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6102536930719273941}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7130804939372395484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6403299520270033953}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 94750583850d825498edeff8285d742b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  obsticleObj_Big:
-  - {fileID: 3983286879074464541, guid: 3086766ab435ca642b186eed00baf45e, type: 3}
-  obsticleObj_Upper:
-  - {fileID: 5484791874973271364, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
-  obsticleObj:
-  - {fileID: 5307219366594048959, guid: 046393580c011a446af517dd20222dce, type: 3}
+  - {fileID: 4584003438141160408, guid: 67293d904498537468bcade0c3bddd65, type: 3}
 --- !u!1 &6710613660490624181
 GameObject:
   m_ObjectHideFlags: 0
@@ -212,11 +162,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   obsticleObj_Big:
-  - {fileID: 3983286879074464541, guid: 3086766ab435ca642b186eed00baf45e, type: 3}
+  - {fileID: 4348615989577734762, guid: 04da6abb50edfa94b995247c49cc22b4, type: 3}
   obsticleObj_Upper:
-  - {fileID: 5484791874973271364, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
+  - {fileID: 1421979491773691230, guid: 549fdbadd7f488e4cb987ad256824900, type: 3}
   obsticleObj:
-  - {fileID: 5307219366594048959, guid: 046393580c011a446af517dd20222dce, type: 3}
+  - {fileID: 4584003438141160408, guid: 67293d904498537468bcade0c3bddd65, type: 3}
+--- !u!1 &9190520687427019982
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3653836749082687594}
+  - component: {fileID: 4411010913582701938}
+  m_Layer: 0
+  m_Name: Obsticle2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3653836749082687594
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9190520687427019982}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1, z: 16}
+  m_LocalScale: {x: 1, y: 1, z: 0.5}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6102536930719273941}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4411010913582701938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9190520687427019982}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 94750583850d825498edeff8285d742b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  obsticleObj_Big:
+  - {fileID: 4348615989577734762, guid: 04da6abb50edfa94b995247c49cc22b4, type: 3}
+  obsticleObj_Upper:
+  - {fileID: 1421979491773691230, guid: 549fdbadd7f488e4cb987ad256824900, type: 3}
+  obsticleObj:
+  - {fileID: 4584003438141160408, guid: 67293d904498537468bcade0c3bddd65, type: 3}
 --- !u!1001 &7983465508391279413
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -283,10 +283,10 @@ PrefabInstance:
       addedObject: {fileID: 2897009360725168773}
     - targetCorrespondingSourceObject: {fileID: 4213793193239988448, guid: 82f2d75403eaa1348a9ec2e9da6698d2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 7465873687083817845}
+      addedObject: {fileID: 3653836749082687594}
     - targetCorrespondingSourceObject: {fileID: 4213793193239988448, guid: 82f2d75403eaa1348a9ec2e9da6698d2, type: 3}
       insertIndex: -1
-      addedObject: {fileID: 1913206360341684992}
+      addedObject: {fileID: 1183573528744703720}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 82f2d75403eaa1348a9ec2e9da6698d2, type: 3}
 --- !u!4 &6102536930719273941 stripped
