@@ -48,7 +48,28 @@ public class FirebaseManager : MonoBehaviour
             }
         });
     }
-    
+    //public void LoadLeaderboard()
+    //{
+    //    FirebaseManager.Instance.dbReference.Child("leaderboard").OrderByChild("score").LimitToLast(10).GetValueAsync().ContinueWithOnMainThread(task =>
+    //    {
+    //        if (task.IsCompleted)
+    //        {
+    //            DataSnapshot snapshot = task.Result;
+
+    //            //foreach (DataSnapshot child in snapshot.Children)
+    //            //{
+    //            //    string name = child.Child("name").Value.ToString();
+    //            //    int score = int.Parse(child.Child("score").Value.ToString());
+    //            //    Debug.Log($"Name: {name}, Score: {score}");
+    //            //}
+    //        }
+    //        else
+    //        {
+    //            Debug.LogError("Failed to load leaderboard: " + task.Exception);
+    //        }
+            
+    //    });
+    //}
     public void AddPlayerToLeaderboard(string userId, string name, int score)
     {
         if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(name))
@@ -85,4 +106,5 @@ public class FirebaseManager : MonoBehaviour
             this.score = score;
         }
     }
+
 }

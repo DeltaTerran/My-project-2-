@@ -9,7 +9,7 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class GM : MonoBehaviour
 {
-    [SerializeField] private GameObject _pauseUI, _gameUI, _outroUI;
+    [SerializeField] private GameObject _pauseUI, _gameUI, _outroUI, _leaderboardUI;
     [SerializeField] private TMP_Text _gameT, _pauseT, _outroT;
     private bool _isPaused;
 
@@ -146,7 +146,11 @@ public class GM : MonoBehaviour
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }
-    
+    public void LeaderBoardButton()
+    {
+        _pauseUI.SetActive(false);
+        _leaderboardUI.SetActive(true);
     }
+}
     
     #endregion
