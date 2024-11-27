@@ -2,10 +2,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using GoogleMobileAds.Api;
 using System;
+using Unity.VisualScripting;
 
 public class RestartLvl : MonoBehaviour
 {
+    [SerializeField] GameObject _player;
     private InterstitialAd _interstitialAd;
+    [SerializeField] GameObject _outroUI;
     //private const string _interstitialId = "ca-app-pub-1266056041937204/7234272623";
     private const string _adUnitId = "ca-app-pub-1266056041937204/7234272623";
     void Start()
@@ -133,6 +136,10 @@ public class RestartLvl : MonoBehaviour
         {
             Debug.Log("Interstitial ad full screen content closed.");
             ClosesInterstitialAd();
+            Instantiate(_player, _player.transform.position, _player.transform.rotation);
+            GM.ZVelAdj = 1;
+            GM.LvlCompStatus = "";
+            _outroUI.SetActive(false);
             
         };
         // Raised when the ad failed to open full screen content.

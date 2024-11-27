@@ -64,6 +64,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4817973593461167419, guid: 20ba95ee93fc7894d871c2c692ab7418, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8946254804657563936, guid: 20ba95ee93fc7894d871c2c692ab7418, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -125,6 +133,14 @@ PrefabInstance:
     - target: {fileID: 5484791874973271364, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
       propertyPath: m_Name
       value: Obsticle_Upper Variant Variant
+      objectReference: {fileID: 0}
+    - target: {fileID: 5931011318073926808, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5931011318073926808, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7943437745879601758, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
       propertyPath: m_Enabled

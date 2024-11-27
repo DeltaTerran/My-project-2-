@@ -64,18 +64,24 @@ public class GM : MonoBehaviour
         }
         if (waittoload > 0.5f)
         {
+            
             //SceneManager.LoadScene("Outro");
             _isPaused = true;
             Time.timeScale = 0;
             _outroUI.SetActive(true);
             _gameUI.SetActive(false);
             _outroT.text = _gameT.text;
+            
             if (FirebaseManager.Instance.Auth != null && _addedtoLB == false)
             {
                 FirebaseManager.Instance.AddPlayerToLeaderboard(FirebaseManager.Instance.Auth.CurrentUser.UserId,
                     FirebaseManager.Instance.Auth.CurrentUser.DisplayName,
                     Convert.ToInt32(Score));
                 // FirebaseManager.Instance.AddPlayerToLeaderboard("user123", "TestPlayer", 100);
+                _addedtoLB = true;
+            }
+            else
+            {
                 _addedtoLB = true;
             }
             
@@ -96,6 +102,10 @@ public class GM : MonoBehaviour
         {
             Unpause();
         }
+    }
+    void Fail()
+    {
+
     }
     void Pause()
     {
