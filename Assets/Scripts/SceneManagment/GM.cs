@@ -3,6 +3,7 @@ using Firebase.Auth;
 using Firebase.Database;
 using Firebase.Extensions;
 using TMPro;
+using Unity.Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.SocialPlatforms.Impl;
@@ -19,10 +20,14 @@ public class GM : MonoBehaviour
     public static float Score = 0;
     public float waittoload = 0;
     bool _addedtoLB = false;
+    bool _isDead = false;
     public static float ZVelAdj = 1;
 
     public static string LvlCompStatus = "";
     public int RandNum;
+
+
+    public GameObject camera;
     void Start()
     {
         
@@ -33,6 +38,7 @@ public class GM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Debug.Log(camera.GetComponent<CinemachineCamera>().Target.TrackingTarget);
         Score += Time.deltaTime*4;
         _gameT.text = $"Score: {Convert.ToInt32(Score)}";
         //Код для определения нажата кнопка или нет
@@ -66,13 +72,19 @@ public class GM : MonoBehaviour
         {
             
             //SceneManager.LoadScene("Outro");
-            _isPaused = true;
-            Time.timeScale = 0;
-            _outroUI.SetActive(true);
-            _gameUI.SetActive(false);
-            _outroT.text = _gameT.text;
+
+            if (!_isDead)
+            {
+                _outroUI.SetActive(true);
+                _gameUI.SetActive(false);
+                _isDead = true;
+                _isPaused = true;
+                Time.timeScale = 0;
+            }
             
-            if (FirebaseManager.Instance.Auth != null && _addedtoLB == false)
+            _outroT.text = _gameT.text;
+
+            if (FirebaseManager.Instance.Auth != null && !_addedtoLB)
             {
                 FirebaseManager.Instance.AddPlayerToLeaderboard(FirebaseManager.Instance.Auth.CurrentUser.UserId,
                     FirebaseManager.Instance.Auth.CurrentUser.DisplayName,
@@ -84,7 +96,7 @@ public class GM : MonoBehaviour
             {
                 _addedtoLB = true;
             }
-            
+
         }
     }
     public static void ResetGMValues()
@@ -103,11 +115,8 @@ public class GM : MonoBehaviour
             Unpause();
         }
     }
-    void Fail()
-    {
-
-    }
-    void Pause()
+    
+   public void Pause()
     {
         Time.timeScale = 0;
         _isPaused = true;
@@ -119,7 +128,7 @@ public class GM : MonoBehaviour
             
         }
     }
-    void Unpause()
+    public void Unpause()
     {
         _isPaused = false;
         Time.timeScale = 1;
@@ -129,6 +138,7 @@ public class GM : MonoBehaviour
             _gameUI.SetActive(true);
             _leaderboardUI.SetActive(false);
         }
+        Debug.Log(Time.timeScale);
     }
 
     #region Buttons
@@ -139,8 +149,11 @@ public class GM : MonoBehaviour
     }
     public void QuitButton()
     {
-        Debug.Log(FirebaseManager.Instance.Auth.CurrentUser.DisplayName);
-        //Application.Quit();
+        moveorb.ResetMVValues();
+        ResetGMValues();
+        BlockSpawner.ResetBSValues();
+        SceneManager.LoadScene("Game");
+    //Application.Quit();
     }
     public void SignOutButton()
     {

@@ -12,6 +12,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2960466083885093569, guid: 3086766ab435ca642b186eed00baf45e, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3983286879074464541, guid: 3086766ab435ca642b186eed00baf45e, type: 3}
       propertyPath: m_Name
       value: Obsticle_Big Variant Variant

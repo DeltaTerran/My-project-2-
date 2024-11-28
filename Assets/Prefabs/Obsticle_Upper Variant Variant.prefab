@@ -20,6 +20,10 @@ PrefabInstance:
       propertyPath: m_LocalScale.y
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 4236548022845855320, guid: 20ba95ee93fc7894d871c2c692ab7418, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4422220732834808665, guid: 20ba95ee93fc7894d871c2c692ab7418, type: 3}
       propertyPath: m_LocalScale.x
       value: 1.25
@@ -66,7 +70,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4817973593461167419, guid: 20ba95ee93fc7894d871c2c692ab7418, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4817973593461167419, guid: 20ba95ee93fc7894d871c2c692ab7418, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8946254804657563936, guid: 20ba95ee93fc7894d871c2c692ab7418, type: 3}
       propertyPath: m_Enabled
@@ -140,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5931011318073926808, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
       propertyPath: m_IsTrigger
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7943437745879601758, guid: da73f70bb2033f54c812b8cd8aa990c4, type: 3}
       propertyPath: m_Enabled

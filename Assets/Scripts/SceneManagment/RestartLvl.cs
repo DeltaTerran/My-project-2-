@@ -3,12 +3,14 @@ using UnityEngine.SceneManagement;
 using GoogleMobileAds.Api;
 using System;
 using Unity.VisualScripting;
+using Unity.Cinemachine;
 
 public class RestartLvl : MonoBehaviour
 {
     [SerializeField] GameObject _player;
     private InterstitialAd _interstitialAd;
-    [SerializeField] GameObject _outroUI;
+    [SerializeField] GameObject _camera;
+    [SerializeField] GM _gameManager;
     //private const string _interstitialId = "ca-app-pub-1266056041937204/7234272623";
     private const string _adUnitId = "ca-app-pub-1266056041937204/7234272623";
     void Start()
@@ -16,6 +18,7 @@ public class RestartLvl : MonoBehaviour
         MobileAds.Initialize(initStatus =>{});
         LoadInterstitialAd();
         RegisterEventHandlers(_interstitialAd);
+
 
     }
     
@@ -100,13 +103,7 @@ public class RestartLvl : MonoBehaviour
     }
 
 
-    public void RestartLevel()
-    {
-        moveorb.ResetMVValues();
-        GM.ResetGMValues();
-        BlockSpawner.ResetBSValues();
-        SceneManager.LoadScene("Game");
-    }
+    
     private void RegisterEventHandlers(InterstitialAd interstitialAd)
     {
         // Raised when the ad is estimated to have earned money.
@@ -136,11 +133,17 @@ public class RestartLvl : MonoBehaviour
         {
             Debug.Log("Interstitial ad full screen content closed.");
             ClosesInterstitialAd();
-            Instantiate(_player, _player.transform.position, _player.transform.rotation);
-            GM.ZVelAdj = 1;
-            GM.LvlCompStatus = "";
-            _outroUI.SetActive(false);
+
+
+            _gameManager.Unpause();
             
+            GameObject _playerprefab = Instantiate(_player, moveorb._deathPos, _player.transform.rotation);
+            _camera.GetComponent<CinemachineCamera>().Target.TrackingTarget = _playerprefab.transform;
+
+            GM.LvlCompStatus = "";
+            _gameManager.waittoload = 0;
+            this.gameObject.SetActive(false);
+
         };
         // Raised when the ad failed to open full screen content.
         interstitialAd.OnAdFullScreenContentFailed += (AdError error) =>
@@ -150,11 +153,13 @@ public class RestartLvl : MonoBehaviour
         };
     }
     #region Buttons
-    public void QuitButton()
+    public void RestartLevel()
     {
-        Application.Quit();
+        moveorb.ResetMVValues();
+        GM.ResetGMValues();
+        BlockSpawner.ResetBSValues();
+        SceneManager.LoadScene("Game");
     }
-
     public void Reborn()
     {
         ShowInterstitialAd();

@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using TMPro;
+using UnityEngine.UIElements;
 
 public class moveorb : MonoBehaviour
 {
@@ -23,7 +24,10 @@ public class moveorb : MonoBehaviour
     public static float Speed=4;
     public static float Timer = 0f;
     public static float DelayAmount = 1;
-    private float _maxSpeed = 12;
+    public static float MaxSpeed = 10;
+    public static Vector3 _deathPos;
+    //private bool _isDead = false;
+
 
     public Transform boomObj;
     public Transform Player;
@@ -39,7 +43,7 @@ public class moveorb : MonoBehaviour
     void Update()
     {
         AccelerateSpeed();
-
+        //Debug.Log(name);
         GetComponent<Rigidbody>().linearVelocity = new Vector3(GM.HorizVel, GM.VertVel, Speed);
         //Debug.Log(Speed);
 
@@ -93,10 +97,11 @@ public class moveorb : MonoBehaviour
         if (Timer >= DelayAmount)
         {
             Timer = 0f;
-            if (Speed < _maxSpeed)
+            if (Speed < MaxSpeed)
             {
                 Speed += 0.25f;
             }
+            
 
         }
     }
@@ -105,10 +110,13 @@ public class moveorb : MonoBehaviour
     {
         if (other.gameObject.tag == "Lethal")
         {
+            Destroy(other.gameObject);
             Destroy(gameObject);
             GM.ZVelAdj = 0;
-            Instantiate(boomObj, transform.position, boomObj.rotation);
+            _deathPos = new Vector3(transform.position.x, transform.position.y+0.1f, transform.position.z);
+            Instantiate(boomObj, _deathPos, boomObj.rotation);
             GM.LvlCompStatus = "Fail";
+
         }
 
         //Old Sistem
@@ -117,34 +125,7 @@ public class moveorb : MonoBehaviour
         //    Destroy(other.gameObject);
         //}
     }
-    private void OnTriggerEnter(Collider other)
-    {
-
-        //Old Sistem
-        //if (other.gameObject.name == "rampbottomtrig")
-        //{
-        //    GM.VertVel = 1.5f;
-        //}
-        //if (other.gameObject.name == "ramptoptrig")
-        //{
-        //    GM.VertVel = 0;
-        //}
-
-
-        if (other.gameObject.name == "exit")
-        {
-            GM.LvlCompStatus = "Sucess";
-            SceneManager.LoadScene("LevelComp");
-        }
-
-
-        //Old Sistem
-        //if (other.gameObject.name == "coin(Clone)")
-        //{
-        //    Destroy(other.gameObject);
-        //    GM.CoinTotal += 1;
-        //}
-    }
+    
 
     IEnumerator stopSlide()
     {
