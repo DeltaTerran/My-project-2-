@@ -1412,6 +1412,7 @@ MonoBehaviour:
   _outroT: {fileID: 2028096908}
   waittoload: 0
   RandNum: 0
+  camera: {fileID: 1084443241}
 --- !u!4 &528339369
 Transform:
   m_ObjectHideFlags: 0
@@ -2469,6 +2470,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _player: {fileID: 3303726390380512471, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+  _camera: {fileID: 1084443241}
   _gameManager: {fileID: 528339368}
 --- !u!4 &826085789
 Transform:
