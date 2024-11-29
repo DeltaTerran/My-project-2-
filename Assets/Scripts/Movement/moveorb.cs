@@ -11,11 +11,15 @@ public class moveorb : MonoBehaviour
 
     //[SerializeField]
     //private TMP_Text _gScore, _oScore;
-    public KeyCode MoveL;
-    public KeyCode MoveR;
-    public KeyCode MoveUp;
-    public KeyCode MoveDown;
-    
+    public KeyCode KeyL;
+    public KeyCode KeyR;
+    public KeyCode KeyUp;
+    public KeyCode KeyDown;
+
+    private Vector2 startTouchPosition;
+    private Vector2 endTouchPosition;
+
+
 
     private int LaneNum = 2;
     //public float HorizVel = 0;
@@ -47,49 +51,99 @@ public class moveorb : MonoBehaviour
         GetComponent<Rigidbody>().linearVelocity = new Vector3(GM.HorizVel, GM.VertVel, Speed);
         //Debug.Log(Speed);
 
-        if (Input.GetKeyDown(MoveL) && LaneNum > 1 && _controlLocked == "n")
+        if (Input.GetKeyDown(KeyL) && LaneNum > 1 && _controlLocked == "n")
         {
             // Wait for seconds - .5f
             //GM.HorizVel = -2;
             // Wait for seconds - .25f
 
-
-            GM.HorizVel = -4;
-            StartCoroutine(stopSlide());
-            LaneNum -= 1;
-            _controlLocked = "y";
+            MoveLeft();
+            
         }
-        if (Input.GetKeyDown(MoveR) && LaneNum < 3 && _controlLocked == "n")
+        if (Input.GetKeyDown(KeyR) && LaneNum < 3 && _controlLocked == "n")
         {
-
-
             // Wait for seconds - .5f
             //GM.HorizVel = 2;
             // Wait for seconds - .25f
 
+            MoveRight();
 
-            GM.HorizVel = 4;
-            StartCoroutine(stopSlide());
-            LaneNum += 1;
-            _controlLocked = "y";
         }
-        if (Input.GetKeyDown(MoveUp) && _controlLocked == "n")
+        if (Input.GetKeyDown(KeyUp) && _controlLocked == "n")
         {
-            GM.VertVel = 6;
-            StartCoroutine(stopJump());
-            _controlLocked = "y";
+            MoveUP();
         }
-        if (Input.GetKeyDown(MoveDown) && _controlLocked == "n")
+        if (Input.GetKeyDown(KeyDown) && _controlLocked == "n")
         {
-            Player.GetComponent<CapsuleCollider>().height = 1;
-            Player.GetComponent<CapsuleCollider>().center = new Vector3(0,0.5f, 0);
-            Debug.Log(Player.GetComponent<CapsuleCollider>().height);
-
-            
-            StartCoroutine(StopRoll());
+            MoveDown();
         }
     }
+    #region Movement
+    private void MoveDown()
+    {
+        Player.GetComponent<CapsuleCollider>().height = 1;
+        Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 0.5f, 0);
+        Debug.Log(Player.GetComponent<CapsuleCollider>().height);
 
+
+        StartCoroutine(StopRoll());
+    }
+
+    private void MoveUP()
+    {
+        GM.VertVel = 6;
+        StartCoroutine(stopJump());
+        _controlLocked = "y";
+    }
+
+    private void MoveRight()
+    {
+        GM.HorizVel = 4;
+        StartCoroutine(stopSlide());
+        LaneNum += 1;
+        _controlLocked = "y";
+    }
+
+    private void MoveLeft()
+    {
+        GM.HorizVel = -4;
+        StartCoroutine(stopSlide());
+        LaneNum -= 1;
+        _controlLocked = "y";
+    }
+    IEnumerator stopSlide()
+    {
+        yield return new WaitForSeconds(.25f);
+        GM.HorizVel = 0;
+        _controlLocked = "n";
+    }
+    IEnumerator stopJump()
+    {
+
+        yield return new WaitForSeconds(.5f);
+        //while (Player.transform.position.y != StartYPos && GM.VertVel != -2) 
+        //{
+        //    GM.VertVel = -2;
+        //}
+        GM.VertVel = -6;
+        yield return new WaitForSeconds(.5f);
+        GM.VertVel = 0;
+        Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
+        _controlLocked = "n";
+    }
+    IEnumerator StopRoll()
+    {
+        yield return new WaitForSeconds(.9f);
+        //ColliderSliding.SetActive(false);
+        //ColliderStanding.SetActive(true);
+
+        //Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
+        ////Player.localScale = new Vector3(1,1,1);
+        Player.GetComponent<CapsuleCollider>().height = 2;
+        Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
+        _controlLocked = "n";
+    }
+    #endregion
     private void AccelerateSpeed()
     {
         Timer += Time.deltaTime;
@@ -127,38 +181,7 @@ public class moveorb : MonoBehaviour
     }
     
 
-    IEnumerator stopSlide()
-    {
-        yield return new WaitForSeconds(.25f);
-        GM.HorizVel = 0;
-        _controlLocked = "n";
-    }
-    IEnumerator stopJump()
-    {
-        
-        yield return new WaitForSeconds(.5f);
-        //while (Player.transform.position.y != StartYPos && GM.VertVel != -2) 
-        //{
-        //    GM.VertVel = -2;
-        //}
-        GM.VertVel = -6;
-        yield return new WaitForSeconds(.5f);  
-        GM.VertVel = 0;
-        Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
-        _controlLocked = "n";
-    }
-    IEnumerator StopRoll ()
-    {
-        yield return new WaitForSeconds(.9f);
-        //ColliderSliding.SetActive(false);
-        //ColliderStanding.SetActive(true);
-
-        //Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
-        ////Player.localScale = new Vector3(1,1,1);
-        Player.GetComponent<CapsuleCollider>().height = 2;
-        Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
-        _controlLocked = "n";
-    }
+    
     public static void ResetMVValues()
     {
         Speed = 4;
