@@ -14,14 +14,16 @@ public class JumpSlide : MonoBehaviour
     {
         if (_animator != null)
         {
-            if (Input.GetKeyDown(KeyCode.W))
-            {
-                _animator.SetTrigger("JumpTr");
-            }
-            if (Input.GetKeyDown(KeyCode.S))
-            {
-                _animator.SetTrigger("SlideTr");
-            }
+            #region Windows System
+            //if (Input.GetKeyDown(KeyCode.W))
+            //{
+            //    _animator.SetTrigger("JumpTr");
+            //}
+            //if (Input.GetKeyDown(KeyCode.S))
+            //{
+            //    _animator.SetTrigger("SlideTr");
+            //}
+            #endregion
         }
     }
 }

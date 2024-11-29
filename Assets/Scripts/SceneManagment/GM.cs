@@ -27,7 +27,6 @@ public class GM : MonoBehaviour
     public int RandNum;
 
 
-    public GameObject camera;
     void Start()
     {
         
@@ -38,23 +37,37 @@ public class GM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
         //Debug.Log(camera.GetComponent<CinemachineCamera>().Target.TrackingTarget);
         Score += Time.deltaTime*4;
         _gameT.text = $"Score: {Convert.ToInt32(Score)}";
         //Код для определения нажата кнопка или нет
-        if (Input.GetMouseButtonDown(0))
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    MouseClick();
+        //}
+        //if (Input.touchCount > 0)
+        //{
+        //    _touch = Input.GetTouch(0);
+        //    touchPosition = _touch.position;
+        //}
+        //if (_isPaused)
+        //{
+
+        //}
+        //Debug.Log("123");
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
         {
-            RaycastHit raycastHit;
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            if (Physics.Raycast(ray, out raycastHit, 100f))
+
+            Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+            RaycastHit hit;
+
+            if (Physics.Raycast(ray, out hit) && hit.transform.gameObject.tag != "Button")
             {
-                if (raycastHit.transform != null)
-                {
-                    //Our custom method. 
-                    CurrentClickedGameObject(raycastHit.transform.gameObject);
-                }
+                Unpause();
             }
         }
+
         //if (_isPaused)
         //{
         //    if (Input.GetKeyDown(KeyCode.Mouse0))
@@ -99,6 +112,21 @@ public class GM : MonoBehaviour
 
         }
     }
+
+    //private void MouseClick()
+    //{
+    //    RaycastHit raycastHit;
+    //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+    //    if (Physics.Raycast(ray, out raycastHit, 100f))
+    //    {
+    //        if (raycastHit.transform != null)
+    //        {
+    //            //Our custom method. 
+    //            CurrentClickedGameObject(raycastHit.transform.gameObject);
+    //        }
+    //    }
+    //}
+
     public static void ResetGMValues()
     {
         VertVel = 0;

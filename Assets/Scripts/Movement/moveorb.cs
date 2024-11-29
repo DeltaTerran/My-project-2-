@@ -1,23 +1,22 @@
-using System;
 using System.Collections;
-using System.Security.Cryptography;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using TMPro;
-using UnityEngine.UIElements;
 
 public class moveorb : MonoBehaviour
 {
 
     //[SerializeField]
     //private TMP_Text _gScore, _oScore;
-    public KeyCode KeyL;
-    public KeyCode KeyR;
-    public KeyCode KeyUp;
-    public KeyCode KeyDown;
-
-    private Vector2 startTouchPosition;
-    private Vector2 endTouchPosition;
+    #region Windows System
+    //public KeyCode KeyL;
+    //public KeyCode KeyR;
+    //public KeyCode KeyUp;
+    //public KeyCode KeyDown;
+    #endregion
+    private Vector2 _startTouchPosition;
+    private Vector2 _currentTouchPosition;
+    private bool stopTouch = false;
+    private float swipeRange = 50;
+    private Animator _animator;
 
 
 
@@ -25,7 +24,7 @@ public class moveorb : MonoBehaviour
     //public float HorizVel = 0;
     private string _controlLocked = "n";
     private float _startYPos = 0.46f;
-    public static float Speed=4;
+    public static float Speed = 4;
     public static float Timer = 0f;
     public static float DelayAmount = 1;
     public static float MaxSpeed = 10;
@@ -40,47 +39,87 @@ public class moveorb : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        // mover.GetComponent<Rigidbody>();
+        _animator = GetComponentInChildren<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
         AccelerateSpeed();
-        //Debug.Log(name);
         GetComponent<Rigidbody>().linearVelocity = new Vector3(GM.HorizVel, GM.VertVel, Speed);
-        //Debug.Log(Speed);
+        #region Mobile System
+        //if (Input.touchCount > 0)
+        //{
+        //    Touch touch = Input.GetTouch(0);
+        //    Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+        //    touchPosition.z = 0f;
+        //}
+        SwipeCheck();
+        #endregion
+        #region Windows System;
+        //if (Input.GetKeyDown(KeyL) && LaneNum > 1 && _controlLocked == "n")
+        //{
+        //    MoveLeft();
+        //}
+        //if (Input.GetKeyDown(KeyR) && LaneNum < 3 && _controlLocked == "n")
+        //{
+        //    MoveRight();
+        //}
+        //if (Input.GetKeyDown(KeyUp) && _controlLocked == "n")
+        //{
+        //    MoveUP();
+        //}
+        //if (Input.GetKeyDown(KeyDown) && _controlLocked == "n")
+        //{
+        //    MoveDown();
+        //}
+        #endregion
 
-        if (Input.GetKeyDown(KeyL) && LaneNum > 1 && _controlLocked == "n")
-        {
-            // Wait for seconds - .5f
-            //GM.HorizVel = -2;
-            // Wait for seconds - .25f
-
-            MoveLeft();
-            
-        }
-        if (Input.GetKeyDown(KeyR) && LaneNum < 3 && _controlLocked == "n")
-        {
-            // Wait for seconds - .5f
-            //GM.HorizVel = 2;
-            // Wait for seconds - .25f
-
-            MoveRight();
-
-        }
-        if (Input.GetKeyDown(KeyUp) && _controlLocked == "n")
-        {
-            MoveUP();
-        }
-        if (Input.GetKeyDown(KeyDown) && _controlLocked == "n")
-        {
-            MoveDown();
-        }
     }
     #region Movement
+    void SwipeCheck()
+    {
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            _startTouchPosition = Input.GetTouch(0).position;
+            stopTouch = false;
+        }
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && !stopTouch)
+        {
+            _currentTouchPosition = Input.GetTouch(0).position;
+            Vector2 swipeDelta = _currentTouchPosition - _startTouchPosition;
+            if (swipeDelta.magnitude > swipeRange)
+            {
+                stopTouch = true;
+
+                if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
+                {
+                    if (swipeDelta.x > 0)
+                    {
+                        MoveRight();
+                    }
+                    else
+                    {
+                        MoveLeft();
+                    }
+                }
+                else
+                if (swipeDelta.y > 0)
+                {
+                    MoveUP();
+                    _animator.SetTrigger("JumpTr");
+                }
+                else
+                {
+                    MoveDown();
+                    _animator.SetTrigger("SlideTr");
+                }
+            }
+        }
+    }
     private void MoveDown()
     {
+
         Player.GetComponent<CapsuleCollider>().height = 1;
         Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 0.5f, 0);
         Debug.Log(Player.GetComponent<CapsuleCollider>().height);
@@ -155,7 +194,7 @@ public class moveorb : MonoBehaviour
             {
                 Speed += 0.25f;
             }
-            
+
 
         }
     }
@@ -167,7 +206,7 @@ public class moveorb : MonoBehaviour
             Destroy(other.gameObject);
             Destroy(gameObject);
             GM.ZVelAdj = 0;
-            _deathPos = new Vector3(transform.position.x, transform.position.y+0.1f, transform.position.z);
+            _deathPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
             Instantiate(boomObj, _deathPos, boomObj.rotation);
             GM.LvlCompStatus = "Fail";
 
@@ -179,9 +218,9 @@ public class moveorb : MonoBehaviour
         //    Destroy(other.gameObject);
         //}
     }
-    
 
-    
+
+
     public static void ResetMVValues()
     {
         Speed = 4;
