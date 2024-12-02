@@ -93,13 +93,11 @@ public class GM : MonoBehaviour
                 {
                     if (hit.collider.CompareTag("btn")) // Если тег совпадает
                     {
-                        Debug.Log("Кнопка нажата через Touch!");
                         return;
                     }
                 }
 
                 // Если не по кнопке, запускаем игру
-                Debug.Log("Кнопка не нажата через Touch!");
                 //Unpause();
             }
         }
