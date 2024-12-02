@@ -11,6 +11,7 @@ public class RestartLvl : MonoBehaviour
     private InterstitialAd _interstitialAd;
     [SerializeField] GameObject _camera;
     [SerializeField] GM _gameManager;
+    [SerializeField] GameObject _outroUI;
     //private const string _interstitialId = "ca-app-pub-1266056041937204/7234272623";
     private const string _adUnitId = "ca-app-pub-1266056041937204/7234272623";
     void Start()
@@ -142,7 +143,11 @@ public class RestartLvl : MonoBehaviour
 
             GM.LvlCompStatus = "";
             _gameManager.waittoload = 0;
-            this.gameObject.SetActive(false);
+            
+            GM.ResetGMValues();
+            moveorb.ResetMVValues();
+            _outroUI.SetActive(false);
+            Debug.Log(567);
 
         };
         // Raised when the ad failed to open full screen content.

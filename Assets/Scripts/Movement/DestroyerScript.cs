@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class DeleteCollider : MonoBehaviour
+public class DestroyerCollider : MonoBehaviour
 {
     private float _dSpeed = 5;
     private bool _isMaxed = false;

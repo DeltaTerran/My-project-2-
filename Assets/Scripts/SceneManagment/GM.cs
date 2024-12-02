@@ -12,8 +12,8 @@ using UnityEngine.SocialPlatforms.Impl;
 
 public class GM : MonoBehaviour
 {
-    [SerializeField] private GameObject _pauseUI, _gameUI, _outroUI, _leaderboardUI;
-    [SerializeField] private TMP_Text _gameT, _pauseT, _outroT;
+    [SerializeField] private GameObject _mainMenuUI, _gameUI, _outroUI, _leaderboardUI, _pauseUI;
+    [SerializeField] private TMP_Text _gameT, _outroT;
     private bool _isPaused;
 
     public static float VertVel = 0;
@@ -21,8 +21,8 @@ public class GM : MonoBehaviour
     //public static int CoinTotal = 0;
     public static float Score = 0;
     public float waittoload = 0;
-    bool _addedtoLB = false;
-    bool _isDead = false;
+    static bool _addedtoLB = false;
+    static bool _isDead = false;
     public static float ZVelAdj = 1;
 
     public static string LvlCompStatus = "";
@@ -32,7 +32,7 @@ public class GM : MonoBehaviour
     void Start()
     {
         
-        Pause();
+        EnterMenu();
 
     }
 
@@ -132,6 +132,7 @@ public class GM : MonoBehaviour
         if (LvlCompStatus == "Fail")
         {
             waittoload += Time.deltaTime;
+            
         }
         if (waittoload > 0.5f)
         {
@@ -146,6 +147,7 @@ public class GM : MonoBehaviour
                 _isPaused = true;
                 Time.timeScale = 0;
             }
+            
             
             _outroT.text = _gameT.text;
 
@@ -187,6 +189,7 @@ public class GM : MonoBehaviour
         Score = 0;
         ZVelAdj = 0;
         LvlCompStatus = "";
+        _isDead = false;
     }
     //public void CurrentClickedGameObject(GameObject gameObject)
     //{
@@ -206,7 +209,7 @@ public class GM : MonoBehaviour
         _isPaused = true;
         if (_isPaused)
         {
-            _pauseT.text = _gameT.text;
+            //_pauseT.text = _gameT.text;
             _pauseUI.SetActive(true);
             _gameUI.SetActive(false);
             
@@ -218,9 +221,11 @@ public class GM : MonoBehaviour
         Time.timeScale = 1;
         if (!_isPaused)
         {
-            _pauseUI.SetActive(false);
+            //_mainMenuUI.SetActive(false);
             _gameUI.SetActive(true);
-            _leaderboardUI.SetActive(false);
+            _pauseUI.SetActive(false);
+            _mainMenuUI.SetActive(false);
+            //_leaderboardUI.SetActive(false);
         }
     }
 
@@ -232,11 +237,17 @@ public class GM : MonoBehaviour
     }
     public void QuitButton()
     {
-        moveorb.ResetMVValues();
-        ResetGMValues();
-        BlockSpawner.ResetBSValues();
-        SceneManager.LoadScene("Game");
-    //Application.Quit();
+        //moveorb.ResetMVValues();
+        //ResetGMValues();
+        //BlockSpawner.ResetBSValues();
+        //SceneManager.LoadScene("Game");
+    Application.Quit();
+    }
+    public void EnterMenu()
+    {
+        _mainMenuUI.SetActive(true);
+        _isPaused = true;
+        Time.timeScale = 0;
     }
     public void SignOutButton()
     {
@@ -255,16 +266,15 @@ public class GM : MonoBehaviour
     }
     public void LeaderBoardButton()
     {
-        _pauseUI.SetActive(false);
+        _mainMenuUI.SetActive(false);
         _leaderboardUI.SetActive(true);
     }
     public void BoBackFromLeaderBoardButton()
     {
         _leaderboardUI.SetActive(false);
-        _pauseUI.SetActive(true);
+        _mainMenuUI.SetActive(true);
     }
-    #endregion
-    #region Events
+
     #endregion
 
 }

@@ -20,16 +20,20 @@ public class moveorb : MonoBehaviour
 
 
 
-    private int LaneNum = 2;
-    //public float HorizVel = 0;
+    private int _laneNum = 0;
+    //private float _laneDistance = 2.5f;
+    //private float _laneSwitchSpeed = 10f;
+    
     private string _controlLocked = "n";
-    private float _startYPos = 0.46f;
+    //private float _startYPos = 0.46f;
     public static float Speed = 4;
     public static float Timer = 0f;
     public static float DelayAmount = 1;
     public static float MaxSpeed = 10;
     public static Vector3 _deathPos;
+    private float _laneWidth = 1f;
     //private bool _isDead = false;
+    //public float HorizVel = 0;
 
 
     public Transform boomObj;
@@ -43,10 +47,15 @@ public class moveorb : MonoBehaviour
     }
 
     // Update is called once per frame
+    
     void Update()
     {
         AccelerateSpeed();
         GetComponent<Rigidbody>().linearVelocity = new Vector3(GM.HorizVel, GM.VertVel, Speed);
+
+        Vector3 targetPosition = new Vector3(_laneNum * _laneWidth, transform.position.y, transform.position.z); // 2.5f Ч ширина полосы
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 10f); // 10f Ч скорость смены полосы
+
         #region Mobile System
         //if (Input.touchCount > 0)
         //{
@@ -96,15 +105,17 @@ public class moveorb : MonoBehaviour
                 {
                     if (swipeDelta.x > 0 )
                     {
-                        if (_controlLocked == "n")
+                        if (_controlLocked == "n" && _laneNum < 1)
                         {
+                            _laneNum++;
                             MoveRight();
                         }
                     }
                     else
                     {
-                        if (_controlLocked == "n")
+                        if (_controlLocked == "n" && _laneNum > -1)
                         {
+                            _laneNum--;
                             MoveLeft();
                         }
                         
@@ -113,21 +124,13 @@ public class moveorb : MonoBehaviour
                 else
                 if (swipeDelta.y > 0)
                 {
-                    if (_controlLocked == "n")
-                    {
                         MoveUP();
-                        _animator.SetTrigger("JumpTr");
-                    }                    
-                    
+                        _animator.SetTrigger("JumpTr");                   
                 }
                 else
                 {
-                    if (_controlLocked == "n")
-                    {
                         MoveDown();
                         _animator.SetTrigger("SlideTr");
-                    }
-                        
                 }
             }
         }
@@ -140,50 +143,50 @@ public class moveorb : MonoBehaviour
 
 
         StartCoroutine(StopRoll());
-        _controlLocked = "y";
     }
 
     private void MoveUP()
     {
-        GM.VertVel = 6;
+        //GM.VertVel = 6;
+        //Player.GetComponent<CapsuleCollider>().height = 1;
+        Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 3.5f, 0);
         StartCoroutine(stopJump());
-        _controlLocked = "y";
     }
 
     private void MoveRight()
     {
-        GM.HorizVel = 4;
         StartCoroutine(stopSlide());
-        LaneNum += 1;
+        //_laneNum += 1;
         _controlLocked = "y";
     }
 
     private void MoveLeft()
     {
-        GM.HorizVel = -4;
         StartCoroutine(stopSlide());
-        LaneNum -= 1;
+        //_laneNum -= 1;
         _controlLocked = "y";
     }
     IEnumerator stopSlide()
     {
-        yield return new WaitForSeconds(.25f);
+        yield return new WaitForSeconds(.125f);
         GM.HorizVel = 0;
         _controlLocked = "n";
+        transform.position = new Vector3(_laneNum, Player.transform.position.y, Player.transform.position.z);
     }
     IEnumerator stopJump()
     {
 
-        yield return new WaitForSeconds(.5f);
+        yield return new WaitForSeconds(.9f);
+        //Player.GetComponent<CapsuleCollider>().height = 2;
+        Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
         //while (Player.transform.position.y != StartYPos && GM.VertVel != -2) 
         //{
         //    GM.VertVel = -2;
         //}
-        GM.VertVel = -6;
-        yield return new WaitForSeconds(.5f);
-        GM.VertVel = 0;
-        Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
-        _controlLocked = "n";
+        //GM.VertVel = -6;
+        //yield return new WaitForSeconds(.5f);
+        //GM.VertVel = 0;
+        // Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
     }
     IEnumerator StopRoll()
     {
@@ -195,7 +198,6 @@ public class moveorb : MonoBehaviour
         ////Player.localScale = new Vector3(1,1,1);
         Player.GetComponent<CapsuleCollider>().height = 2;
         Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
-        _controlLocked = "n";
     }
     #endregion
     private void AccelerateSpeed()
