@@ -94,25 +94,40 @@ public class moveorb : MonoBehaviour
 
                 if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
                 {
-                    if (swipeDelta.x > 0)
+                    if (swipeDelta.x > 0 )
                     {
-                        MoveRight();
+                        if (_controlLocked == "n")
+                        {
+                            MoveRight();
+                        }
                     }
                     else
                     {
-                        MoveLeft();
+                        if (_controlLocked == "n")
+                        {
+                            MoveLeft();
+                        }
+                        
                     }
                 }
                 else
                 if (swipeDelta.y > 0)
                 {
-                    MoveUP();
-                    _animator.SetTrigger("JumpTr");
+                    if (_controlLocked == "n")
+                    {
+                        MoveUP();
+                        _animator.SetTrigger("JumpTr");
+                    }                    
+                    
                 }
                 else
                 {
-                    MoveDown();
-                    _animator.SetTrigger("SlideTr");
+                    if (_controlLocked == "n")
+                    {
+                        MoveDown();
+                        _animator.SetTrigger("SlideTr");
+                    }
+                        
                 }
             }
         }
@@ -122,10 +137,10 @@ public class moveorb : MonoBehaviour
 
         Player.GetComponent<CapsuleCollider>().height = 1;
         Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 0.5f, 0);
-        Debug.Log(Player.GetComponent<CapsuleCollider>().height);
 
 
         StartCoroutine(StopRoll());
+        _controlLocked = "y";
     }
 
     private void MoveUP()
