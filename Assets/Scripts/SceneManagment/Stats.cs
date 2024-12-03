@@ -12,10 +12,10 @@ public class Stats : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (gameObject.name == "StatsTxt")
-        {
-            GetComponent<TextMeshPro>().text = GM.LvlCompStatus;
-        }
+        //if (gameObject.name == "StatsTxt")
+        //{
+        //    GetComponent<TextMeshPro>().text = .LvlCompStatus;
+        //}
         //if (gameObject.name == "CoinsTxt")
         //{
         //    GetComponent<TextMeshPro>().text = "Coins : " + GM.CoinTotal;

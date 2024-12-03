@@ -35,7 +35,8 @@ public class moveorb : MonoBehaviour
     //private bool _isDead = false;
     //public float HorizVel = 0;
 
-
+    public GameObject GameManager;
+    private GM _gM;
     public Transform boomObj;
     public Transform Player;
 
@@ -43,6 +44,7 @@ public class moveorb : MonoBehaviour
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
+        _gM = GameManager.GetComponent<GM>();
         _animator = GetComponentInChildren<Animator>();
     }
 
@@ -220,12 +222,17 @@ public class moveorb : MonoBehaviour
     {
         if (other.gameObject.tag == "Lethal")
         {
-            Destroy(other.gameObject);
-            Destroy(gameObject);
-            GM.ZVelAdj = 0;
-            _deathPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
-            Instantiate(boomObj, _deathPos, boomObj.rotation);
-            GM.LvlCompStatus = "Fail";
+            if (!_gM.IsDead)
+            {
+                Destroy(other.gameObject);
+                Destroy(gameObject);
+                GM.ZVelAdj = 0;
+                _deathPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
+                //Instantiate(boomObj, _deathPos, boomObj.rotation);
+                _gM.LvlCompStatus = "Fail";
+                _gM.IsDead = true;
+            }
+
 
         }
 

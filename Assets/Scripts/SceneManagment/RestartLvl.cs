@@ -10,12 +10,15 @@ public class RestartLvl : MonoBehaviour
     [SerializeField] GameObject _player;
     private InterstitialAd _interstitialAd;
     [SerializeField] GameObject _camera;
-    [SerializeField] GM _gameManager;
+    [SerializeField] GameObject _gameManager;
     [SerializeField] GameObject _outroUI;
+
+    GM _gM;
     //private const string _interstitialId = "ca-app-pub-1266056041937204/7234272623";
     private const string _adUnitId = "ca-app-pub-1266056041937204/7234272623";
     void Start()
     {
+        _gM = _gameManager.GetComponent<GM>();
         MobileAds.Initialize(initStatus =>{});
         LoadInterstitialAd();
         RegisterEventHandlers(_interstitialAd);
@@ -135,19 +138,7 @@ public class RestartLvl : MonoBehaviour
             Debug.Log("Interstitial ad full screen content closed.");
             ClosesInterstitialAd();
 
-
-            _gameManager.Unpause();
-            
-            GameObject _playerprefab = Instantiate(_player, moveorb._deathPos, _player.transform.rotation);
-            _camera.GetComponent<CinemachineCamera>().Target.TrackingTarget = _playerprefab.transform;
-
-            GM.LvlCompStatus = "";
-            _gameManager.waittoload = 0;
-            
-            GM.ResetGMValues();
-            moveorb.ResetMVValues();
-            _outroUI.SetActive(false);
-            Debug.Log(567);
+            RebornTM();
 
         };
         // Raised when the ad failed to open full screen content.
@@ -157,11 +148,32 @@ public class RestartLvl : MonoBehaviour
                            "with error : " + error);
         };
     }
+
+    private void RebornTM()
+    {
+        Debug.Log(123);
+
+        _gM.IsDead = false;
+        _gM.AddedtoLB = false;
+        _gM.LvlCompStatus = "";
+        //Debug.Log(GM.LvlCompStatus);
+        _gM.Waittoload = 0;
+
+        //_gM.ResetGMValues();
+        //moveorb.ResetMVValues();
+        _outroUI.SetActive(false);
+        Debug.Log(567);
+        GameObject _playerprefab = Instantiate(_player, moveorb._deathPos, _player.transform.rotation);
+        _camera.GetComponent<CinemachineCamera>().Target.TrackingTarget = _playerprefab.transform;
+        _playerprefab.GetComponent<moveorb>().GameManager = GameObject.Find("GM");
+        
+        _gM.Unpause();
+    }
     #region Buttons
     public void RestartLevel()
     {
         moveorb.ResetMVValues();
-        GM.ResetGMValues();
+        _gM.ResetGMValues();
         BlockSpawner.ResetBSValues();
         SceneManager.LoadScene("Game");
     }

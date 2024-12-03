@@ -15,17 +15,18 @@ public class GM : MonoBehaviour
     [SerializeField] private GameObject _mainMenuUI, _gameUI, _outroUI, _leaderboardUI, _pauseUI;
     [SerializeField] private TMP_Text _gameT, _outroT;
     private bool _isPaused;
+    public bool AddedtoLB = false;
+    public bool IsDead = false;
 
     public static float VertVel = 0;
     public static float HorizVel = 0;
     //public static int CoinTotal = 0;
     public static float Score = 0;
-    public float waittoload = 0;
-    static bool _addedtoLB = false;
-    static bool _isDead = false;
+    public float Waittoload = 0;
+
     public static float ZVelAdj = 1;
 
-    public static string LvlCompStatus = "";
+    public string LvlCompStatus = "";
     public int RandNum;
 
 
@@ -39,7 +40,8 @@ public class GM : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        //Debug.Log(LvlCompStatus);
+        //Debug.Log(_isDead);
         //Debug.Log(camera.GetComponent<CinemachineCamera>().Target.TrackingTarget);
         Score += Time.deltaTime*4;
         _gameT.text = $"Score: {Convert.ToInt32(Score)}";
@@ -131,38 +133,41 @@ public class GM : MonoBehaviour
 
         if (LvlCompStatus == "Fail")
         {
-            waittoload += Time.deltaTime;
+            Waittoload += Time.deltaTime;
             
         }
-        if (waittoload > 0.5f)
+        if (Waittoload > 0.5f)
         {
             
             //SceneManager.LoadScene("Outro");
 
-            if (!_isDead)
+            if (IsDead)
             {
                 _outroUI.SetActive(true);
                 _gameUI.SetActive(false);
-                _isDead = true;
-                _isPaused = true;
+                
                 Time.timeScale = 0;
-            }
-            
-            
-            _outroT.text = _gameT.text;
 
-            if (FirebaseManager.Instance.Auth != null && !_addedtoLB)
-            {
-                FirebaseManager.Instance.AddPlayerToLeaderboard(FirebaseManager.Instance.Auth.CurrentUser.UserId,
-                    FirebaseManager.Instance.Auth.CurrentUser.DisplayName,
-                    Convert.ToInt32(Score));
-                // FirebaseManager.Instance.AddPlayerToLeaderboard("user123", "TestPlayer", 100);
-                _addedtoLB = true;
+                _isPaused = true;
+
+                _outroT.text = _gameT.text;
+
+                if (FirebaseManager.Instance.Auth != null && !AddedtoLB)
+                {
+                    FirebaseManager.Instance.AddPlayerToLeaderboard(FirebaseManager.Instance.Auth.CurrentUser.UserId,
+                        FirebaseManager.Instance.Auth.CurrentUser.DisplayName,
+                        Convert.ToInt32(Score));
+                    // FirebaseManager.Instance.AddPlayerToLeaderboard("user123", "TestPlayer", 100);
+                    AddedtoLB = true;
+                }
+                else
+                {
+                    AddedtoLB = true;
+                }
+
             }
-            else
-            {
-                _addedtoLB = true;
-            }
+
+
 
         }
     }
@@ -181,7 +186,7 @@ public class GM : MonoBehaviour
     //    }
     //}
 
-    public static void ResetGMValues()
+    public void ResetGMValues()
     {
         VertVel = 0;
         HorizVel = 0;
@@ -189,7 +194,7 @@ public class GM : MonoBehaviour
         Score = 0;
         ZVelAdj = 0;
         LvlCompStatus = "";
-        _isDead = false;
+        IsDead = false;
     }
     //public void CurrentClickedGameObject(GameObject gameObject)
     //{
