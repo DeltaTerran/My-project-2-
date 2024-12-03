@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "1003052871859",
+    "firebase_url": "https://deltazerg-1a06b-default-rtdb.europe-west1.firebasedatabase.app",
+    "project_id": "deltazerg-1a06b",
+    "storage_bucket": "deltazerg-1a06b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1003052871859:android:5dc95111019f2904b540c6",
+        "android_client_info": {
+          "package_name": "com.BG.EndlessRunnerVM"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD0QjKy-08-8N3XCDrbx85C93smfzkMr7Q"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
