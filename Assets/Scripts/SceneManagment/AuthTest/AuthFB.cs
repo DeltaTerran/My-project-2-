@@ -27,7 +27,9 @@ public class AuthFB : MonoBehaviour
         //    {
         //        //Auth = FirebaseAuth.DefaultInstance;
         //        //_databaseReference = FirebaseDatabase.DefaultInstance.RootReference;
-        //        //Debug.Log("Firebase Auth инициализирован!");
+        //        //
+        //
+        //        ("Firebase Auth инициализирован!");
         //    }
         //    else
         //    {

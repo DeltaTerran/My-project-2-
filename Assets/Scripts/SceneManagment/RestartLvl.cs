@@ -4,7 +4,35 @@ using GoogleMobileAds.Api;
 using System;
 using Unity.VisualScripting;
 using Unity.Cinemachine;
+#region Коменты
+//void RequestInterstitial()
+//{
+//    string adUnitId = "ca-app-pub-3940256099942544/1033173712"; // Тестовый ID
+//    var adRequest = new AdRequest();
+//    InterstitialAd.Load(adUnitId, adRequest,
+//        (InterstitialAd ad, LoadAdError error) =>
+//        {
+//            if (error != null || ad == null)
+//            {
+//                Debug.LogError("Не удалось загрузить межстраничную рекламу: " + error);
+//                return;
+//            }
 
+//            Debug.Log("Межстраничная реклама загружена.");
+//            _interstitialAd = ad;
+
+//            // Подписка на события
+//        });
+//}
+//void ShowAd()
+//{
+
+//    if (interstitial.IsLoaded())
+//    {
+//        interstitial.Show();
+//    }
+//}
+#endregion
 public class RestartLvl : MonoBehaviour
 {
     [SerializeField] GameObject _player;
@@ -14,46 +42,19 @@ public class RestartLvl : MonoBehaviour
     [SerializeField] GameObject _outroUI;
 
     GM _gM;
-    //private const string _interstitialId = "ca-app-pub-1266056041937204/7234272623";
-    private const string _adUnitId = "ca-app-pub-1266056041937204/7234272623";
+    private const string _adUnitId = "ca-app-pub-3940256099942544/1033173712";
     void Start()
     {
         _gM = _gameManager.GetComponent<GM>();
         MobileAds.Initialize(initStatus =>{});
         LoadInterstitialAd();
-        RegisterEventHandlers(_interstitialAd);
+        
 
 
     }
     
 
-    //void RequestInterstitial()
-    //{
-    //    string adUnitId = "ca-app-pub-3940256099942544/1033173712"; // Тестовый ID
-    //    var adRequest = new AdRequest();
-    //    InterstitialAd.Load(adUnitId, adRequest,
-    //        (InterstitialAd ad, LoadAdError error) =>
-    //        {
-    //            if (error != null || ad == null)
-    //            {
-    //                Debug.LogError("Не удалось загрузить межстраничную рекламу: " + error);
-    //                return;
-    //            }
-
-    //            Debug.Log("Межстраничная реклама загружена.");
-    //            _interstitialAd = ad;
-
-    //            // Подписка на события
-    //        });
-    //}
-    //void ShowAd()
-    //{
-
-    //    if (interstitial.IsLoaded())
-    //    {
-    //        interstitial.Show();
-    //    }
-    //}
+  
     void ClosesInterstitialAd()
     {
         if (_interstitialAd != null)
@@ -91,6 +92,7 @@ public class RestartLvl : MonoBehaviour
                         + ad.GetResponseInfo());
 
               _interstitialAd = ad;
+              RegisterEventHandlers(_interstitialAd);
           });
     }
     public void ShowInterstitialAd()
@@ -151,7 +153,6 @@ public class RestartLvl : MonoBehaviour
 
     private void RebornTM()
     {
-        Debug.Log(123);
 
         _gM.IsDead = false;
         _gM.AddedtoLB = false;
@@ -162,7 +163,7 @@ public class RestartLvl : MonoBehaviour
         //_gM.ResetGMValues();
         //moveorb.ResetMVValues();
         _outroUI.SetActive(false);
-        Debug.Log(567);
+        //Debug.Log(567);
         GameObject _playerprefab = Instantiate(_player, moveorb._deathPos, _player.transform.rotation);
         _camera.GetComponent<CinemachineCamera>().Target.TrackingTarget = _playerprefab.transform;
         _playerprefab.GetComponent<moveorb>().GameManager = GameObject.Find("GM");
@@ -180,6 +181,7 @@ public class RestartLvl : MonoBehaviour
     public void Reborn()
     {
         ShowInterstitialAd();
+        LoadInterstitialAd();
     }
     #endregion
 }
