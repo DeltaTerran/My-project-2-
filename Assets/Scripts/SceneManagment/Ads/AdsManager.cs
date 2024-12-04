@@ -5,7 +5,7 @@ using UnityEngine;
 public class AdsManager : MonoBehaviour
 {
     private string _adUnitId = "ca-app-pub-3940256099942544/1033173712";
-    private InterstitialAd _interstitialAd;
+    public InterstitialAd InterstitialAd;
     public static AdsManager Instance;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -18,35 +18,25 @@ public class AdsManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        MobileAds.Initialize(initStatus =>
-        {
-            Debug.Log("AdMob SDK инициализирован");
-        });
-        RegisterEventHandlers(_interstitialAd);
+        
+       
        
     }
     private void Start()
     {
+        MobileAds.Initialize(initStatus =>
+        {
+            Debug.Log("AdMob SDK инициализирован");
+        });
         LoadInterstitialAd();
     }
-    void ClosesInterstitialAd()
-    {
-        if (_interstitialAd != null)
-        {
-            _interstitialAd.Destroy();
-            _interstitialAd = null;
-        }
-        else
-        {
-            Debug.Log("Баннер не существует или уже был закрыт.");
-        }
-    }
+    
     public void LoadInterstitialAd()
     {
-        if (_interstitialAd != null)
+        if (InterstitialAd != null)
         {
-            _interstitialAd.Destroy();
-            _interstitialAd = null;
+            InterstitialAd.Destroy();
+            InterstitialAd = null;
         }
 
         Debug.Log("Loading the interstitial ad.");
@@ -65,23 +55,36 @@ public class AdsManager : MonoBehaviour
             Debug.Log("Interstitial ad loaded with response : "
                       + ad.GetResponseInfo());
 
-            _interstitialAd = ad;
+            InterstitialAd = ad;
+            RegisterEventHandlers(InterstitialAd);
         });
     }
+    
     public void ShowInterstitialAd()
     {
-        if (_interstitialAd != null && _interstitialAd.CanShowAd())
+        if (InterstitialAd != null && InterstitialAd.CanShowAd())
         {
             Debug.Log("Showing interstitial ad.");
-            _interstitialAd.Show();
+            InterstitialAd.Show();
         }
         else
         {
             Debug.LogError("Interstitial ad is not ready yet.");
         }
-        LoadInterstitialAd();
+        //LoadInterstitialAd();
     }
-
+    void ClosesInterstitialAd()
+    {
+        if (InterstitialAd != null)
+        {
+            InterstitialAd.Destroy();
+            InterstitialAd = null;
+        }
+        else
+        {
+            Debug.Log("Баннер не существует или уже был закрыт.");
+        }
+    }
 
 
     private void RegisterEventHandlers(InterstitialAd interstitialAd)
@@ -113,7 +116,8 @@ public class AdsManager : MonoBehaviour
         {
             Debug.Log("Interstitial ad full screen content closed.");
             ClosesInterstitialAd();
-
+            GameObject.Find("OutroMenu").GetComponent<RestartLvl>().RebornTM();
+            LoadInterstitialAd();
             //RebornTM();
 
         };
