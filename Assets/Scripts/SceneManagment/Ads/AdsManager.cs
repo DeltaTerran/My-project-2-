@@ -1,12 +1,14 @@
 using System;
 using GoogleMobileAds.Api;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AdsManager : MonoBehaviour
 {
     private string _adUnitId = "ca-app-pub-3940256099942544/1033173712";
     public InterstitialAd InterstitialAd;
     public static AdsManager Instance;
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
     {
@@ -115,8 +117,19 @@ public class AdsManager : MonoBehaviour
         interstitialAd.OnAdFullScreenContentClosed += () =>
         {
             Debug.Log("Interstitial ad full screen content closed.");
+            if (!SceneManager.GetActiveScene().isLoaded)
+            {
+                Debug.LogError("Scene is not fully loaded. Delaying RebornTM.");
+                return;
+            }
             ClosesInterstitialAd();
-            GameObject.Find("OutroMenu").GetComponent<RestartLvl>().RebornTM();
+            GameObject outroMenu = GameObject.Find("OutroMenu");
+            if (outroMenu == null)
+            {
+                Debug.LogError("OutroMenu object not found.");
+                return;
+            }
+            outroMenu.GetComponent<RestartLvl>().RebornTM();
             LoadInterstitialAd();
             //RebornTM();
 

@@ -37,7 +37,7 @@ public class moveorb : MonoBehaviour
 
     public GameObject GameManager;
     private GM _gM;
-    public Transform boomObj;
+    //public Transform boomObj;
     public Transform Player;
 
     //Rigidbody mover;

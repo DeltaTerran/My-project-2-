@@ -3042,6 +3042,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _player: {fileID: 2495914963020416679, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
   _camera: {fileID: 1084443241}
+  _rebornbutton: {fileID: 1596919297}
   _gameManager: {fileID: 528339367}
   _outroUI: {fileID: 826085787}
 --- !u!4 &826085789
@@ -4510,11 +4511,6 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
---- !u!4 &1491748481 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 1556082956005423956, guid: 11b61da61c052424585a9d45940a83c9, type: 3}
-  m_PrefabInstance: {fileID: 9037108721730976289}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1596919297
 GameObject:
   m_ObjectHideFlags: 0
@@ -5937,7 +5933,7 @@ PrefabInstance:
     - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: boomObj
       value: 
-      objectReference: {fileID: 1491748481}
+      objectReference: {fileID: 0}
     - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: GameManager
       value: 
@@ -5991,67 +5987,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
---- !u!1001 &9037108721730976289
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 1556082956005423956, guid: 11b61da61c052424585a9d45940a83c9, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 1.3733194
-      objectReference: {fileID: 0}
-    - target: {fileID: 1556082956005423956, guid: 11b61da61c052424585a9d45940a83c9, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: -1.7879281
-      objectReference: {fileID: 0}
-    - target: {fileID: 1556082956005423956, guid: 11b61da61c052424585a9d45940a83c9, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 8.764431
-      objectReference: {fileID: 0}
-    - target: {fileID: 1556082956005423956, guid: 11b61da61c052424585a9d45940a83c9, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1556082956005423956, guid: 11b61da61c052424585a9d45940a83c9, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.7071068
-      objectReference: {fileID: 0}
-    - target: {fileID: 1556082956005423956, guid: 11b61da61c052424585a9d45940a83c9, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1556082956005423956, guid: 11b61da61c052424585a9d45940a83c9, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1556082956005423956, guid: 11b61da61c052424585a9d45940a83c9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: -90
-      objectReference: {fileID: 0}
-    - target: {fileID: 1556082956005423956, guid: 11b61da61c052424585a9d45940a83c9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1556082956005423956, guid: 11b61da61c052424585a9d45940a83c9, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7677711505995430575, guid: 11b61da61c052424585a9d45940a83c9, type: 3}
-      propertyPath: m_Name
-      value: boom
-      objectReference: {fileID: 0}
-    - target: {fileID: 7677711505995430575, guid: 11b61da61c052424585a9d45940a83c9, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 11b61da61c052424585a9d45940a83c9, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -6060,7 +5995,6 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 832575519}
   - {fileID: 528339369}
-  - {fileID: 9037108721730976289}
   - {fileID: 738408870}
   - {fileID: 1084443242}
   - {fileID: 1033284425}
