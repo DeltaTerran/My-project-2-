@@ -211,7 +211,7 @@ public class RestartLvl : MonoBehaviour
     }
     public void Reborn()
     {
-            if (AdsManager.Instance.InterstitialAd != null)
+            if (AdsManager.Instance.RewardedInterstitialAd != null)
             {
                 AdsManager.Instance.ShowInterstitialAd();
             RebornTM();

@@ -7,7 +7,7 @@ using UnityEngine.SceneManagement;
 public class AdsManager : MonoBehaviour
 {
     private string _adUnitId = "ca-app-pub-3940256099942544/1033173712";
-    public InterstitialAd InterstitialAd;
+    public RewardedInterstitialAd RewardedInterstitialAd;
     public static AdsManager Instance;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -36,15 +36,15 @@ public class AdsManager : MonoBehaviour
     
     public void LoadInterstitialAd()
     {
-        if (InterstitialAd != null)
+        if (RewardedInterstitialAd != null)
         {
-            InterstitialAd.Destroy();
-            InterstitialAd = null;
+            RewardedInterstitialAd.Destroy();
+            RewardedInterstitialAd = null;
         }
 
         Debug.Log("Loading the interstitial ad.");
         var adRequest = new AdRequest();
-        InterstitialAd.Load(_adUnitId, adRequest, (InterstitialAd ad, LoadAdError error) =>
+        RewardedInterstitialAd.Load(_adUnitId, adRequest, (RewardedInterstitialAd ad, LoadAdError error) =>
         {
             // if error is not null, the load request failed.
             if (error != null || ad == null)
@@ -58,17 +58,17 @@ public class AdsManager : MonoBehaviour
             Debug.Log("Interstitial ad loaded with response : "
                       + ad.GetResponseInfo());
 
-            InterstitialAd = ad;
-            RegisterEventHandlers(InterstitialAd);
+            RewardedInterstitialAd = ad;
+            RegisterEventHandlers(RewardedInterstitialAd);
         });
     }
     
     public void ShowInterstitialAd()
     {
-        if (InterstitialAd != null && InterstitialAd.CanShowAd())
+        if (RewardedInterstitialAd != null && RewardedInterstitialAd.CanShowAd())
         {
             Debug.Log("Showing interstitial ad.");
-            InterstitialAd.Show();
+            RewardedInterstitialAd.Show();
         }
         else
         {
@@ -78,10 +78,10 @@ public class AdsManager : MonoBehaviour
     }
     void ClosesInterstitialAd()
     {
-        if (InterstitialAd != null)
+        if (RewardedInterstitialAd != null)
         {
-            InterstitialAd.Destroy();
-            InterstitialAd = null;
+            RewardedInterstitialAd.Destroy();
+            RewardedInterstitialAd = null;
         }
         else
         {
