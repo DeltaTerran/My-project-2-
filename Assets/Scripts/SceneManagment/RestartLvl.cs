@@ -35,7 +35,8 @@ using Unity.Cinemachine;
 #endregion
 public class RestartLvl : MonoBehaviour
 {
-    [SerializeField] GameObject _player;
+    [SerializeField] GameObject _player, _playerReplacement;
+    //[SerializeField] GameObject ;
     //private InterstitialAd _interstitialAd;
     [SerializeField] GameObject _camera;
     [SerializeField] GameObject _rebornbutton;
@@ -43,7 +44,7 @@ public class RestartLvl : MonoBehaviour
     [SerializeField] GameObject _outroUI;
 
     GM _gM;
-    bool _isReborn = false;
+    //bool _isReborn = false;
     //private const string _adUnitId = "ca-app-pub-3940256099942544/1033173712";
     void Start()
     {
@@ -157,10 +158,10 @@ public class RestartLvl : MonoBehaviour
 
     public void RebornTM()
     {
-        if (_player == null)
-        {
-            return;
-        }
+        //if (_player == null)
+        //{
+        //    return;
+        //}
         _gM.IsDead = false;
         _gM.AddedtoLB = false;
         _gM.LvlCompStatus = "";
@@ -171,23 +172,33 @@ public class RestartLvl : MonoBehaviour
         //moveorb.ResetMVValues();
         _outroUI.SetActive(false);
         //Debug.Log(567);
-        GameObject _playerprefab = Instantiate(_player, moveorb._deathPos, _player.transform.rotation);
-        if (_playerprefab == null)
-        {
-            Debug.LogError("Failed to instantiate player prefab.");
-            return;
-        }
+        _playerReplacement.transform.position = moveorb._deathPos;
+        //GameObject _playerprefab = Instantiate(_player, moveorb._deathPos, _player.transform.rotation);
+        //if (_playerprefab == null)
+        //{
+        //    Debug.LogError("Failed to instantiate player prefab.");
+        //    return;
+        //}
+        //Renderer[] renderers = _player.GetComponentsInChildren<Renderer>();
+        //foreach (var renderer in renderers)
+        //{
+        //    if (renderer.material == null)
+        //    {
+        //        Debug.LogError($"Material is missing on object {renderer.gameObject.name}.");
+        //    }
+        //    // Настройка камеры
+        //    if (_camera == null || _camera.GetComponent<CinemachineCamera>() == null)
+        //    {
+        //        Debug.LogError("Camera or Cinemachine component is missing.");
+        //        return;
+        //    }
+        //}
+        //_camera.GetComponent<CinemachineCamera>().Target.TrackingTarget = _playerprefab.transform;
+        //player = 
+        _playerReplacement.SetActive(true);
+        _camera.GetComponent<CinemachineCamera>().Target.TrackingTarget = _playerReplacement.transform;
+        //_playerprefab.GetComponent<moveorb>().GameManager = GameObject.Find("GM");
 
-        // Настройка камеры
-        if (_camera == null || _camera.GetComponent<CinemachineCamera>() == null)
-        {
-            Debug.LogError("Camera or Cinemachine component is missing.");
-            return;
-        }
-
-        _camera.GetComponent<CinemachineCamera>().Target.TrackingTarget = _playerprefab.transform;
-        _playerprefab.GetComponent<moveorb>().GameManager = GameObject.Find("GM");
-        
         _gM.Unpause();
     }
     #region Buttons
@@ -203,6 +214,7 @@ public class RestartLvl : MonoBehaviour
             if (AdsManager.Instance.InterstitialAd != null)
             {
                 AdsManager.Instance.ShowInterstitialAd();
+            RebornTM();
                 _rebornbutton.SetActive(false);
             }
             else

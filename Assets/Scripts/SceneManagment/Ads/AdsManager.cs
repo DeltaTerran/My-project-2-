@@ -1,4 +1,5 @@
 using System;
+using System.Collections;
 using GoogleMobileAds.Api;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -123,14 +124,22 @@ public class AdsManager : MonoBehaviour
                 return;
             }
             ClosesInterstitialAd();
-            GameObject outroMenu = GameObject.Find("OutroMenu");
-            if (outroMenu == null)
-            {
-                Debug.LogError("OutroMenu object not found.");
-                return;
-            }
-            outroMenu.GetComponent<RestartLvl>().RebornTM();
-            LoadInterstitialAd();
+            
+            //GameObject outroMenu = GameObject.Find("OutroMenu");
+            //if (outroMenu == null)
+            //{
+            //    Debug.LogError("OutroMenu object not found.");
+            //    return;
+            //}
+            //StartCoroutine(RespawnAfterDelay());
+            //IEnumerator RespawnAfterDelay()
+            //{
+            //    yield return new WaitForSeconds(0.5f); // Даем время Unity восстановить контекст
+            //    outroMenu.GetComponent<RestartLvl>().RebornTM();
+            //}
+            
+            //outroMenu.GetComponent<RestartLvl>().RebornTM();
+            //LoadInterstitialAd();
             //RebornTM();
 
         };
@@ -141,5 +150,6 @@ public class AdsManager : MonoBehaviour
                            "with error : " + error);
         };
     }
+
 
 }
