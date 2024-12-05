@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 3
   tags:
   - Lethal
+  - Button
+  - btn
   layers:
   - Default
   - TransparentFX
@@ -12,7 +14,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - Buttons
   - 
   - 
   - 
