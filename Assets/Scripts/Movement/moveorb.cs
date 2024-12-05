@@ -6,6 +6,8 @@ public class moveorb : MonoBehaviour
 
     //[SerializeField]
     //private TMP_Text _gScore, _oScore;
+    [SerializeField] Rigidbody player_rigidbody;
+    [SerializeField] CapsuleCollider player_collider;
     #region Windows System
     //public KeyCode KeyL;
     //public KeyCode KeyR;
@@ -53,7 +55,7 @@ public class moveorb : MonoBehaviour
     void Update()
     {
         AccelerateSpeed();
-        GetComponent<Rigidbody>().linearVelocity = new Vector3(GM.HorizVel, GM.VertVel, Speed);
+        player_rigidbody.linearVelocity = new Vector3(GM.HorizVel, GM.VertVel, Speed);
 
         Vector3 targetPosition = new Vector3(_laneNum * _laneWidth, transform.position.y, transform.position.z); // 2.5f Ч ширина полосы
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 10f); // 10f Ч скорость смены полосы
@@ -140,8 +142,8 @@ public class moveorb : MonoBehaviour
     private void MoveDown()
     {
 
-        Player.GetComponent<CapsuleCollider>().height = 1;
-        Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 0.5f, 0);
+        player_collider.height = 1;
+        player_collider.center = new Vector3(0, 0.5f, 0);
 
 
         StartCoroutine(StopRoll());
@@ -151,7 +153,7 @@ public class moveorb : MonoBehaviour
     {
         //GM.VertVel = 6;
         //Player.GetComponent<CapsuleCollider>().height = 1;
-        Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 3.5f, 0);
+        player_collider.center = new Vector3(0, 3.5f, 0);
         StartCoroutine(stopJump());
     }
 
@@ -180,7 +182,7 @@ public class moveorb : MonoBehaviour
 
         yield return new WaitForSeconds(.9f);
         //Player.GetComponent<CapsuleCollider>().height = 2;
-        Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
+        player_collider.center = new Vector3(0, 1, 0);
         //while (Player.transform.position.y != StartYPos && GM.VertVel != -2) 
         //{
         //    GM.VertVel = -2;
@@ -198,8 +200,8 @@ public class moveorb : MonoBehaviour
 
         //Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
         ////Player.localScale = new Vector3(1,1,1);
-        Player.GetComponent<CapsuleCollider>().height = 2;
-        Player.GetComponent<CapsuleCollider>().center = new Vector3(0, 1, 0);
+        player_collider.height = 2;
+        player_collider.center = new Vector3(0, 1, 0);
     }
     #endregion
     private void AccelerateSpeed()

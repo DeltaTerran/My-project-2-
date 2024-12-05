@@ -809,7 +809,6 @@ GameObject:
   - component: {fileID: 330585544}
   - component: {fileID: 330585547}
   - component: {fileID: 330585549}
-  - component: {fileID: 330585548}
   - component: {fileID: 330585550}
   m_Layer: 0
   m_Name: Main Camera
@@ -936,18 +935,6 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
---- !u!114 &330585548
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 330585543}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dfeb7fb003edc7846b3dd6f769ffbe1c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!54 &330585549
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3551,9 +3538,21 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1744669959}
+    - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: GameManager
       value: 
       objectReference: {fileID: 528339367}
+    - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+      propertyPath: player_collider
+      value: 
+      objectReference: {fileID: 1744669958}
+    - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+      propertyPath: player_rigidbody
+      value: 
+      objectReference: {fileID: 1744669959}
     - target: {fileID: 7428194201355376078, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: m_LocalPosition.x
       value: 500
@@ -4630,6 +4629,16 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 2495914963020416679, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
   m_PrefabInstance: {fileID: 1156584274}
   m_PrefabAsset: {fileID: 0}
+--- !u!136 &1744669958 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 5551733088689164536, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+  m_PrefabInstance: {fileID: 1156584274}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1744669959 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 8122938545290578797, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+  m_PrefabInstance: {fileID: 1156584274}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1822682873
 GameObject:
   m_ObjectHideFlags: 0
@@ -5665,6 +5674,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 7428194201355376078, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
   m_PrefabInstance: {fileID: 7479072835914436255}
   m_PrefabAsset: {fileID: 0}
+--- !u!136 &1379859952092126198 stripped
+CapsuleCollider:
+  m_CorrespondingSourceObject: {fileID: 5551733088689164536, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+  m_PrefabInstance: {fileID: 7479072835914436255}
+  m_PrefabAsset: {fileID: 0}
+--- !u!54 &1379859952092126199 stripped
+Rigidbody:
+  m_CorrespondingSourceObject: {fileID: 8122938545290578797, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+  m_PrefabInstance: {fileID: 7479072835914436255}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7479072835914436255
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5678,6 +5697,10 @@ PrefabInstance:
       value: Player_Empty
       objectReference: {fileID: 0}
     - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+      propertyPath: rb
+      value: 
+      objectReference: {fileID: 1379859952092126199}
+    - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: boomObj
       value: 
       objectReference: {fileID: 0}
@@ -5689,6 +5712,14 @@ PrefabInstance:
       propertyPath: _gameManager
       value: 
       objectReference: {fileID: 528339367}
+    - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+      propertyPath: player_collider
+      value: 
+      objectReference: {fileID: 1379859952092126198}
+    - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+      propertyPath: player_rigidbody
+      value: 
+      objectReference: {fileID: 1379859952092126199}
     - target: {fileID: 7428194201355376078, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0

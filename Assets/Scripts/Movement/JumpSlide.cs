@@ -3,10 +3,10 @@ using UnityEngine;
 public class JumpSlide : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+    [SerializeField]
     private Animator _animator;
     void Start()
     {
-        _animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame

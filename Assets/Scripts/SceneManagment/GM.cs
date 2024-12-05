@@ -152,18 +152,18 @@ public class GM : MonoBehaviour
 
                 _outroT.text = _gameT.text;
 
-                if (FirebaseManager.Instance.Auth != null && !AddedtoLB)
-                {
-                    FirebaseManager.Instance.AddPlayerToLeaderboard(FirebaseManager.Instance.Auth.CurrentUser.UserId,
-                        FirebaseManager.Instance.Auth.CurrentUser.DisplayName,
-                        Convert.ToInt32(Score));
-                    // FirebaseManager.Instance.AddPlayerToLeaderboard("user123", "TestPlayer", 100);
-                    AddedtoLB = true;
-                }
-                else
-                {
-                    AddedtoLB = true;
-                }
+                //if (FirebaseManager.Instance.Auth != null && !AddedtoLB)
+                //{
+                //    FirebaseManager.Instance.AddPlayerToLeaderboard(FirebaseManager.Instance.Auth.CurrentUser.UserId,
+                //        FirebaseManager.Instance.Auth.CurrentUser.DisplayName,
+                //        Convert.ToInt32(Score));
+                //    // FirebaseManager.Instance.AddPlayerToLeaderboard("user123", "TestPlayer", 100);
+                //    AddedtoLB = true;
+                //}
+                //else
+                //{
+                //    AddedtoLB = true;
+                //}
 
             }
 
