@@ -197,6 +197,7 @@ public class RestartLvl : MonoBehaviour
         //player = 
         _playerReplacement.SetActive(true);
         _camera.GetComponent<CinemachineCamera>().Target.TrackingTarget = _playerReplacement.transform;
+        _playerReplacement.GetComponent<moveorb>().IFrames();
         //_playerprefab.GetComponent<moveorb>().GameManager = GameObject.Find("GM");
 
         _gM.Unpause();
@@ -213,13 +214,13 @@ public class RestartLvl : MonoBehaviour
     {
             if (AdsManager.Instance.RewardedInterstitialAd != null)
             {
-                AdsManager.Instance.ShowInterstitialAd();
-            RebornTM();
+                AdsManager.Instance.ShowRewardedInterstitialAd();
+            
                 _rebornbutton.SetActive(false);
             }
             else
             {
-                AdsManager.Instance.LoadInterstitialAd();
+                AdsManager.Instance.LoadRewardedInterstitialAd();
             }
     }
 

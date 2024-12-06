@@ -128,13 +128,15 @@ public class moveorb : MonoBehaviour
                 else
                 if (swipeDelta.y > 0)
                 {
-                        MoveUP();
-                        _animator.SetTrigger("JumpTr");                   
+                    _animator.SetTrigger("JumpTr");
+                    MoveUP();
+                                          
                 }
                 else
                 {
-                        MoveDown();
-                        _animator.SetTrigger("SlideTr");
+                    _animator.SetTrigger("SlideTr");
+                    MoveDown();
+                        
                 }
             }
         }
@@ -202,6 +204,12 @@ public class moveorb : MonoBehaviour
         ////Player.localScale = new Vector3(1,1,1);
         player_collider.height = 2;
         player_collider.center = new Vector3(0, 1, 0);
+    }
+    public IEnumerator IFrames()
+    {
+        player_collider.enabled = false;
+        yield return new WaitForSeconds(.9f);
+        player_collider.enabled = false;
     }
     #endregion
     private void AccelerateSpeed()

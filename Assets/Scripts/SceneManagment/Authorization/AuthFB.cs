@@ -14,6 +14,7 @@ public class AuthFB : MonoBehaviour
     GameObject _autorization, _registration;
     [SerializeField]
     TMP_InputField _usernamefield, _emailfield, _passwordfield, _conformpassword;
+    [SerializeField] TMP_Text _wrongLabel;
     //public FirebaseAuth Auth;
     //private DatabaseReference _databaseReference;
 
@@ -50,7 +51,12 @@ public class AuthFB : MonoBehaviour
         {
             if (password != conformpassword)
             {
-                Debug.LogError("Ваши пароли не совпадают");
+                _wrongLabel.text = "Пароли не совпадают";
+                return;
+            }
+            if (password.Length < 6)
+            {
+                _wrongLabel.text = "Пароль сликом короток";
                 return;
             }
             if (task.IsCanceled)
