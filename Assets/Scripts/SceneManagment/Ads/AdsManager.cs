@@ -9,6 +9,7 @@ public class AdsManager : MonoBehaviour
     private string _adUnitId = "ca-app-pub-3940256099942544/5354046379";
     public RewardedInterstitialAd RewardedInterstitialAd;
     public static AdsManager Instance;
+    public RestartLvl RestartLvL;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -20,10 +21,11 @@ public class AdsManager : MonoBehaviour
         }
         Instance = this;
         DontDestroyOnLoad(gameObject);
-
         
-       
-       
+
+
+
+
     }
     private void Start()
     {
@@ -70,9 +72,9 @@ public class AdsManager : MonoBehaviour
             Debug.Log("Showing interstitial ad.");
             RewardedInterstitialAd.Show((Reward reward) =>
             {
-                GameObject.Find("OutroMenu").GetComponent<RestartLvl>().RebornTM();
+                RestartLvL.RebornTM();
                 //Debug.Log($"Пользователь получил награду: {reward.Amount} {reward.Type}");
-                
+
             });
         }
         else

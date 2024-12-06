@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using UnityEngine;
 
@@ -19,6 +20,10 @@ public class moveorb : MonoBehaviour
     private bool stopTouch = false;
     private float swipeRange = 50;
     private Animator _animator;
+    private bool canPlayAnimation = true;
+    private bool isJumping = false;
+    private bool isRolling = false;
+
 
 
 
@@ -40,7 +45,10 @@ public class moveorb : MonoBehaviour
     public GameObject GameManager;
     private GM _gM;
     //public Transform boomObj;
+    [SerializeField] GameObject _player;
     public Transform Player;
+    private float jumpDuration = 0.9f;
+    private float rollDuration = 0.9f;
 
     //Rigidbody mover;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -48,6 +56,8 @@ public class moveorb : MonoBehaviour
     {
         _gM = GameManager.GetComponent<GM>();
         _animator = GetComponentInChildren<Animator>();
+        PlayerStateMachine.Instance.ChangeState(new RunningState(_player, _animator, player_collider));
+        
     }
 
     // Update is called once per frame
@@ -57,9 +67,9 @@ public class moveorb : MonoBehaviour
         AccelerateSpeed();
         player_rigidbody.linearVelocity = new Vector3(GM.HorizVel, GM.VertVel, Speed);
 
-        Vector3 targetPosition = new Vector3(_laneNum * _laneWidth, transform.position.y, transform.position.z); // 2.5f Ч ширина полосы
-        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 10f); // 10f Ч скорость смены полосы
-
+        Vector3 targetPosition = new Vector3(_laneNum * _laneWidth, transform.position.y, transform.position.z);
+        transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 10f);
+        PlayerStateMachine.Instance.Update();
         #region Mobile System
         //if (Input.touchCount > 0)
         //{
@@ -90,6 +100,19 @@ public class moveorb : MonoBehaviour
 
     }
     #region Movement
+    private void HandleLaneSwitching()
+    {
+        
+    }
+    private bool IsInAnimationState(string stateName)
+    {
+        return _animator.GetCurrentAnimatorStateInfo(0).IsName(stateName);
+    }
+    private void SetCollider(float height, Vector3 center)
+    {
+        player_collider.height = height;
+        player_collider.center = center;
+    }
     void SwipeCheck()
     {
         if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
@@ -128,37 +151,62 @@ public class moveorb : MonoBehaviour
                 else
                 if (swipeDelta.y > 0)
                 {
-                    _animator.SetTrigger("JumpTr");
-                    MoveUP();
+
+                    if (canPlayAnimation && !IsInAnimationState("Jump"))
+                    {
+                        PlayerStateMachine.Instance.ChangeState(new JumpingState(_player, _animator, player_collider));
+                        canPlayAnimation = false;
+                        MoveUP();
+                    }
                                           
                 }
-                else
+                //else
+                //{
+                //    _animator.SetTrigger("SlideTr");
+                //    MoveDown();
+
+                //}
+                if(swipeDelta.y < 0)
                 {
-                    _animator.SetTrigger("SlideTr");
-                    MoveDown();
-                        
+
+                    if (canPlayAnimation && !IsInAnimationState("Slide"))
+                    {
+                        PlayerStateMachine.Instance.ChangeState(new SlidingState(_player, _animator, player_collider));
+                        canPlayAnimation = false;
+                        MoveDown();
+                    }
+
                 }
             }
         }
     }
-    private void MoveDown()
-    {
 
-        player_collider.height = 1;
-        player_collider.center = new Vector3(0, 0.5f, 0);
+    //private IEnumerator ResetSlideFlag()
+    //{
+    //    yield return new WaitForSeconds(animationDurationSlide); // ”кажите длительность вашей анимации
+    //    canPlayAnimation = true;
+    //}
 
-
-        StartCoroutine(StopRoll());
-    }
+   
 
     private void MoveUP()
     {
         //GM.VertVel = 6;
         //Player.GetComponent<CapsuleCollider>().height = 1;
-        player_collider.center = new Vector3(0, 3.5f, 0);
+        if (isJumping) return;
+        isJumping = true;
+        SetCollider(2, new Vector3(0, 1, 0));
         StartCoroutine(stopJump());
     }
+     private void MoveDown()
+    {
+        if (isRolling) return;
+        isRolling = true;
+        SetCollider(1, new Vector3(0, 0.5f, 0));
+        player_collider.center = new Vector3(0, 0.5f, 0);
 
+        StartCoroutine(StopRoll());
+    }
     private void MoveRight()
     {
         StartCoroutine(stopSlide());
@@ -182,9 +230,10 @@ public class moveorb : MonoBehaviour
     IEnumerator stopJump()
     {
 
-        yield return new WaitForSeconds(.9f);
+        yield return new WaitForSeconds(jumpDuration);
         //Player.GetComponent<CapsuleCollider>().height = 2;
         player_collider.center = new Vector3(0, 1, 0);
+        isJumping = true;
         //while (Player.transform.position.y != StartYPos && GM.VertVel != -2) 
         //{
         //    GM.VertVel = -2;
@@ -196,7 +245,7 @@ public class moveorb : MonoBehaviour
     }
     IEnumerator StopRoll()
     {
-        yield return new WaitForSeconds(.9f);
+        yield return new WaitForSeconds(rollDuration);
         //ColliderSliding.SetActive(false);
         //ColliderStanding.SetActive(true);
 
@@ -204,12 +253,13 @@ public class moveorb : MonoBehaviour
         ////Player.localScale = new Vector3(1,1,1);
         player_collider.height = 2;
         player_collider.center = new Vector3(0, 1, 0);
+        isRolling = false;
     }
     public IEnumerator IFrames()
     {
         player_collider.enabled = false;
         yield return new WaitForSeconds(.9f);
-        player_collider.enabled = false;
+        player_collider.enabled = true;
     }
     #endregion
     private void AccelerateSpeed()

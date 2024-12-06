@@ -1305,7 +1305,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6141853066223698261, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6306048605644929532, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
       propertyPath: m_Name
@@ -1313,11 +1313,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6710613660490624181, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9079793488008968020, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9190520687427019982, guid: 03334bbed0b133c4fbe9bf4c4a37d22c, type: 3}
       propertyPath: m_IsActive
@@ -3535,12 +3535,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2495914963020416679, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: rb
       value: 
       objectReference: {fileID: 1744669959}
+    - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1744669957}
     - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: GameManager
       value: 
@@ -5700,6 +5704,10 @@ PrefabInstance:
       propertyPath: rb
       value: 
       objectReference: {fileID: 1379859952092126199}
+    - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1249966688}
     - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: boomObj
       value: 

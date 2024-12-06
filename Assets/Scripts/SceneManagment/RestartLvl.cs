@@ -51,7 +51,7 @@ public class RestartLvl : MonoBehaviour
         _gM = _gameManager.GetComponent<GM>();
         //MobileAds.Initialize(initStatus =>{});
         //LoadInterstitialAd();
-        
+        AdsManager.Instance.RestartLvL = _outroUI.GetComponent<RestartLvl>();
 
 
     }
@@ -197,7 +197,7 @@ public class RestartLvl : MonoBehaviour
         //player = 
         _playerReplacement.SetActive(true);
         _camera.GetComponent<CinemachineCamera>().Target.TrackingTarget = _playerReplacement.transform;
-        _playerReplacement.GetComponent<moveorb>().IFrames();
+        
         //_playerprefab.GetComponent<moveorb>().GameManager = GameObject.Find("GM");
 
         _gM.Unpause();
