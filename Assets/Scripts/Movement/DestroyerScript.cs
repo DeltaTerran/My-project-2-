@@ -13,11 +13,11 @@ public class DestroyerCollider : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!_isMaxed && moveorb.Speed == moveorb.MaxSpeed)
+        if (!_isMaxed && PlayerController.Speed == PlayerController.MaxSpeed)
         {
             _isMaxed = true;
         }
-        _destroyer_rigidbody.linearVelocity = new Vector3(GM.HorizVel, GM.VertVel, moveorb.Speed);
+        _destroyer_rigidbody.linearVelocity = new Vector3(GM.HorizVel, GM.VertVel, PlayerController.Speed);
     }
     private void OnCollisionEnter(Collision collision)
     {

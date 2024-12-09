@@ -172,7 +172,7 @@ public class RestartLvl : MonoBehaviour
         //moveorb.ResetMVValues();
         _outroUI.SetActive(false);
         //Debug.Log(567);
-        _playerReplacement.transform.position = moveorb._deathPos;
+        _playerReplacement.transform.position = PlayerController._deathPos;
         //GameObject _playerprefab = Instantiate(_player, moveorb._deathPos, _player.transform.rotation);
         //if (_playerprefab == null)
         //{
@@ -205,7 +205,7 @@ public class RestartLvl : MonoBehaviour
     #region Buttons
     public void RestartLevel()
     {
-        moveorb.ResetMVValues();
+        PlayerController.ResetMVValues();
         _gM.ResetGMValues();
         BlockSpawner.ResetBSValues();
         SceneManager.LoadScene("Game");

@@ -1714,9 +1714,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87176f7bd38972f4e8466316e9b239d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameManager: {fileID: 0}
-  boomObj: {fileID: 0}
-  Player: {fileID: 7428194201355376078}
+  GameManager: {fileID: 0}
+  _player: {fileID: 0}
+  Player_Transform: {fileID: 0}
+  _playerRigidbody: {fileID: 8122938545290578797}
+  _playerCollider: {fileID: 0}
 --- !u!54 &8122938545290578797
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -2729,7 +2731,6 @@ GameObject:
   m_Component:
   - component: {fileID: 5604928996104427571}
   - component: {fileID: 8341753120914869588}
-  - component: {fileID: 5629879591940813420}
   m_Layer: 0
   m_Name: HumanMale_Character@Fast Run 1
   m_TagString: Untagged
@@ -2776,18 +2777,6 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
---- !u!114 &5629879591940813420
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5081016496682369673}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 397521c1f425dd749a6bd878176d5edc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &5110122854157621559
 GameObject:
   m_ObjectHideFlags: 0

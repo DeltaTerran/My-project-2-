@@ -1,14 +1,15 @@
 using System;
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 
-public class moveorb : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     #region Links
     public GameObject GameManager;
     private GM _gM;
     [SerializeField] GameObject _player;
-    public Transform Player;
+    public Transform Player_Transform;
     [SerializeField] Rigidbody _playerRigidbody;
     [SerializeField] CapsuleCollider _playerCollider;
     #endregion
@@ -22,16 +23,16 @@ public class moveorb : MonoBehaviour
     //public KeyCode KeyDown;
     #endregion
     #region Phone System
-    private Vector2 _startTouchPosition;
-    private Vector2 _currentTouchPosition;
-    private bool stopTouch = false;
-    private float swipeRange = 50;
+    //private Vector2 _startTouchPosition;
+    //private Vector2 _currentTouchPosition;
+    //private bool stopTouch = false;
+    //private float swipeRange = 50;
     private string _controlLocked = "n";
     #endregion
 
     #region Animator
     private Animator _animator;
-    public static bool CanPlayAnimation = true;
+    //public static bool CanPlayAnimation = true;
     //private bool isJumping = false;
     //private bool isRolling = false;
     #endregion
@@ -60,10 +61,16 @@ public class moveorb : MonoBehaviour
         _animator = GetComponentInChildren<Animator>();
         PlayerStateMachine.Instance.ChangeState(new RunningState(_player, _animator, _playerCollider));
 
+        SwipeDetector.OnSwipe += HandleSwipe;
+
+    }
+    private void OnDestroy()
+    {
+        SwipeDetector.OnSwipe -= HandleSwipe;
     }
 
     // Update is called once per frame
-    
+
     void Update()
     {
         AccelerateSpeed();
@@ -75,13 +82,8 @@ public class moveorb : MonoBehaviour
         //stateMachine.Update();
         PlayerStateMachine.Instance.Update();
         #region Mobile System
-        //if (Input.touchCount > 0)
-        //{
-        //    Touch touch = Input.GetTouch(0);
-        //    Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
-        //    touchPosition.z = 0f;
-        //}
-        SwipeCheck();
+        
+        //SwipeCheck();
         #endregion
         #region Windows System;
         //if (Input.GetKeyDown(KeyL) && LaneNum > 1 && _controlLocked == "n")
@@ -114,73 +116,80 @@ public class moveorb : MonoBehaviour
         _playerCollider.height = height;
         _playerCollider.center = center;
     }
-    void SwipeCheck()
-    {
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            _startTouchPosition = Input.GetTouch(0).position;
-            stopTouch = false;
-        }
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && !stopTouch)
-        {
-            _currentTouchPosition = Input.GetTouch(0).position;
-            Vector2 swipeDelta = _currentTouchPosition - _startTouchPosition;
-            if (swipeDelta.magnitude > swipeRange)
-            {
-                stopTouch = true;
+    #region old systems
+    //void SwipeCheck()
+    //if (Input.touchCount > 0)
+    //{
+    //    Touch touch = Input.GetTouch(0);
+    //    Vector3 touchPosition = Camera.main.ScreenToWorldPoint(touch.position);
+    //    touchPosition.z = 0f;
+    //}
+    //{
+    //    if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+    //    {
+    //        _startTouchPosition = Input.GetTouch(0).position;
+    //        stopTouch = false;
+    //    }
+    //    if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Moved && !stopTouch)
+    //    {
+    //        _currentTouchPosition = Input.GetTouch(0).position;
+    //        Vector2 swipeDelta = _currentTouchPosition - _startTouchPosition;
+    //        if (swipeDelta.magnitude > swipeRange)
+    //        {
+    //            stopTouch = true;
 
-                if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
-                {
-                    if (swipeDelta.x > 0 )
-                    {
-                        if (_controlLocked == "n" && _laneNum < 1)
-                        {
-                            _laneNum++;
-                            MoveRight();
-                        }
-                    }
-                    else
-                    {
-                        if (_controlLocked == "n" && _laneNum > -1)
-                        {
-                            _laneNum--;
-                            MoveLeft();
-                        }
-                        
-                    }
-                }
-                else
-                if (swipeDelta.y > 0)
-                {
+    //            if (Mathf.Abs(swipeDelta.x) > Mathf.Abs(swipeDelta.y))
+    //            {
+    //                if (swipeDelta.x > 0 )
+    //                {
+    //                    if (_controlLocked == "n" && _laneNum < 1)
+    //                    {
+    //                        _laneNum++;
+    //                        MoveRight();
+    //                    }
+    //                }
+    //                else
+    //                {
+    //                    if (_controlLocked == "n" && _laneNum > -1)
+    //                    {
+    //                        _laneNum--;
+    //                        MoveLeft();
+    //                    }
 
-                    if (CanPlayAnimation)
-                    {
-                        PlayerStateMachine.Instance.ChangeState(new JumpingState(_player, _animator, _playerCollider));
-                        CanPlayAnimation = false;
-                        //MoveUP();
-                    }
-                                          
-                }
-                //else
-                //{
-                //    _animator.SetTrigger("SlideTr");
-                //    MoveDown();
+    //                }
+    //            }
+    //            else
+    //            if (swipeDelta.y > 0)
+    //            {
 
-                //}
-                if(swipeDelta.y < 0)
-                {
+    //                //if (CanPlayAnimation)
+    //                //{
+    //                PlayerStateMachine.Instance.ChangeState(new JumpingState(_player, _animator, _playerCollider));
+    //                //    CanPlayAnimation = false;
+    //                //    //MoveUP();
+    //                //}
 
-                    if (CanPlayAnimation)
-                    {
-                        PlayerStateMachine.Instance.ChangeState(new SlidingState(_player, _animator, _playerCollider));
-                        CanPlayAnimation = false;
-                        //MoveDown();
-                    }
+    //            }
+    //            //else
+    //            //{
+    //            //    _animator.SetTrigger("SlideTr");
+    //            //    MoveDown();
 
-                }
-            }
-        }
-    }
+    //            //}
+    //            if(swipeDelta.y < 0)
+    //            {
+
+    //                //if (CanPlayAnimation)
+    //                //{
+    //                PlayerStateMachine.Instance.ChangeState(new SlidingState(_player, _animator, _playerCollider));
+    //                    //CanPlayAnimation = false;
+    //                //    //MoveDown();
+    //                //}
+
+    //            }
+    //        }
+    //    }
+    //}
 
     //private IEnumerator ResetSlideFlag()
     //{
@@ -188,7 +197,7 @@ public class moveorb : MonoBehaviour
     //    canPlayAnimation = true;
     //}
 
-   
+
 
     //private void MoveUP()
     //{
@@ -208,6 +217,43 @@ public class moveorb : MonoBehaviour
 
     //    StartCoroutine(StopRoll());
     //}
+    //IEnumerator stopJump()
+    //{
+
+    //    yield return new WaitForSeconds(jumpDuration);
+    //    //Player.GetComponent<CapsuleCollider>().height = 2;
+    //    _playerCollider.center = new Vector3(0, 1, 0);
+    //    //isJumping = true;
+    //    //while (Player.transform.position.y != StartYPos && GM.VertVel != -2) 
+    //    //{
+    //    //    GM.VertVel = -2;
+    //    //}
+    //    //GM.VertVel = -6;
+    //    //yield return new WaitForSeconds(.5f);
+    //    //GM.VertVel = 0;
+    //    // Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
+    //}
+
+
+    //IEnumerator StopRoll()
+    //{
+    //    yield return new WaitForSeconds(rollDuration);
+    //    //ColliderSliding.SetActive(false);
+    //    //ColliderStanding.SetActive(true);
+
+    //    //Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
+    //    ////Player.localScale = new Vector3(1,1,1);
+    //    _playerCollider.height = 2;
+    //    _playerCollider.center = new Vector3(0, 1, 0);
+    //    //isRolling = false;
+    //}
+
+    //Old Sistem
+    //if (other.gameObject.name == "PowerUp(Clone)")
+    //{
+    //    Destroy(other.gameObject);
+    //}
+    #endregion
     private void MoveRight()
     {
         StartCoroutine(stopSlide());
@@ -226,36 +272,9 @@ public class moveorb : MonoBehaviour
         yield return new WaitForSeconds(.125f);
         GM.HorizVel = 0;
         _controlLocked = "n";
-        transform.position = new Vector3(_laneNum, Player.transform.position.y, Player.transform.position.z);
+        transform.position = new Vector3(_laneNum, Player_Transform.position.y, Player_Transform.position.z);
     }
-    //IEnumerator stopJump()
-    //{
-
-    //    yield return new WaitForSeconds(jumpDuration);
-    //    //Player.GetComponent<CapsuleCollider>().height = 2;
-    //    _playerCollider.center = new Vector3(0, 1, 0);
-    //    //isJumping = true;
-    //    //while (Player.transform.position.y != StartYPos && GM.VertVel != -2) 
-    //    //{
-    //    //    GM.VertVel = -2;
-    //    //}
-    //    //GM.VertVel = -6;
-    //    //yield return new WaitForSeconds(.5f);
-    //    //GM.VertVel = 0;
-    //    // Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
-    //}
-    //IEnumerator StopRoll()
-    //{
-    //    yield return new WaitForSeconds(rollDuration);
-    //    //ColliderSliding.SetActive(false);
-    //    //ColliderStanding.SetActive(true);
-
-    //    //Player.position = new Vector3(Player.position.x, _startYPos, Player.position.z);
-    //    ////Player.localScale = new Vector3(1,1,1);
-    //    _playerCollider.height = 2;
-    //    _playerCollider.center = new Vector3(0, 1, 0);
-    //    //isRolling = false;
-    //}
+    
     public IEnumerator IFrames()
     {
         _playerCollider.enabled = false;
@@ -297,13 +316,7 @@ public class moveorb : MonoBehaviour
 
         }
 
-        //Old Sistem
-        //if (other.gameObject.name == "PowerUp(Clone)")
-        //{
-        //    Destroy(other.gameObject);
-        //}
     }
-
 
 
     public static void ResetMVValues()
@@ -312,4 +325,31 @@ public class moveorb : MonoBehaviour
         Timer = 0f;
         DelayAmount = 1;
     }
+    private void HandleSwipe(SwipeDetector.PlayerSwipeDetector direction)
+    {
+        switch (direction)
+        {
+            case SwipeDetector.PlayerSwipeDetector.Up:
+                PlayerStateMachine.Instance.ChangeState(new JumpingState(_player, _animator, _playerCollider));
+                break;
+                case SwipeDetector.PlayerSwipeDetector.Down:
+                PlayerStateMachine.Instance.ChangeState(new SlidingState(_player, _animator, _playerCollider)); 
+                break;
+                case SwipeDetector.PlayerSwipeDetector.Left:
+                if (_controlLocked == "n" && _laneNum > -1)
+                {
+                    _laneNum--;
+                    MoveLeft();
+                }
+                break;
+            case SwipeDetector.PlayerSwipeDetector.Right:
+                if (_controlLocked == "n" && _laneNum < 1)
+                {
+                    _laneNum++;
+                    MoveRight();
+                }
+                break;
+        }
+    }
+
 }
