@@ -7,11 +7,14 @@ public class PlayerController : MonoBehaviour
 {
     #region Links
     public GameObject GameManager;
-    private GM _gM;
+    [SerializeField] private GM _gM;
     [SerializeField] GameObject _player;
     public Transform Player_Transform;
-    [SerializeField] Rigidbody _playerRigidbody;
-    [SerializeField] CapsuleCollider _playerCollider;
+    //[SerializeField] Rigidbody _playerRigidbody;
+    //[SerializeField] CapsuleCollider _playerCollider;
+    [SerializeField]Rigidbody _playerRigidbody;
+    [SerializeField]CapsuleCollider _playerCollider;
+    [SerializeField]private PlayerStateMachine _stateMachine;
     #endregion
     //[SerializeField]
     //private TMP_Text _gScore, _oScore;
@@ -50,16 +53,18 @@ public class PlayerController : MonoBehaviour
     public static float MaxSpeed = 10;
     public static Vector3 _deathPos;
     private float _laneWidth = 1f;
-    //private bool _isDead = false;
+    public static bool _isDead = false;
     //public float HorizVel = 0;
     #endregion
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-        _gM = GameManager.GetComponent<GM>();
+        //_playerCollider = _player.GetComponent<CapsuleCollider>();
+        //_playerRigidbody = _player.GetComponent<Rigidbody>();
+        //_gM = GameManager.GetComponent<GM>();
         _animator = GetComponentInChildren<Animator>();
-        PlayerStateMachine.Instance.ChangeState(new RunningState(_player, _animator, _playerCollider));
+        _stateMachine.ChangeState(new RunningState(_player, _animator, _playerCollider, _stateMachine));
 
         SwipeDetector.OnSwipe += HandleSwipe;
 
@@ -80,7 +85,7 @@ public class PlayerController : MonoBehaviour
         transform.position = Vector3.Lerp(transform.position, targetPosition, Time.deltaTime * 10f);
 
         //stateMachine.Update();
-        PlayerStateMachine.Instance.Update();
+        _stateMachine.Update();
         #region Mobile System
         
         //SwipeCheck();
@@ -164,7 +169,7 @@ public class PlayerController : MonoBehaviour
 
     //                //if (CanPlayAnimation)
     //                //{
-    //                PlayerStateMachine.Instance.ChangeState(new JumpingState(_player, _animator, _playerCollider));
+    //                stateMachine.ChangeState(new JumpingState(_player, _animator, _playerCollider));
     //                //    CanPlayAnimation = false;
     //                //    //MoveUP();
     //                //}
@@ -181,7 +186,7 @@ public class PlayerController : MonoBehaviour
 
     //                //if (CanPlayAnimation)
     //                //{
-    //                PlayerStateMachine.Instance.ChangeState(new SlidingState(_player, _animator, _playerCollider));
+    //                stateMachine.ChangeState(new SlidingState(_player, _animator, _playerCollider));
     //                    //CanPlayAnimation = false;
     //                //    //MoveDown();
     //                //}
@@ -308,6 +313,10 @@ public class PlayerController : MonoBehaviour
                 Destroy(gameObject);
                 GM.ZVelAdj = 0;
                 _deathPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
+                _stateMachine.ChangeState(new RunningState(_player,_animator,_playerCollider, _stateMachine));
+                _animator.ResetTrigger("JumpTr");
+                _animator.ResetTrigger("SlideTr");
+                _animator.ResetTrigger("JumpSlideTr");
                 //Instantiate(boomObj, _deathPos, boomObj.rotation);
                 _gM.LvlCompStatus = "Fail";
                 _gM.IsDead = true;
@@ -324,16 +333,19 @@ public class PlayerController : MonoBehaviour
         Speed = 4;
         Timer = 0f;
         DelayAmount = 1;
+
+
     }
+
     private void HandleSwipe(SwipeDetector.PlayerSwipeDetector direction)
     {
         switch (direction)
         {
             case SwipeDetector.PlayerSwipeDetector.Up:
-                PlayerStateMachine.Instance.ChangeState(new JumpingState(_player, _animator, _playerCollider));
+                _stateMachine.ChangeState(new JumpingState(_player, _animator, _playerCollider, _stateMachine));
                 break;
                 case SwipeDetector.PlayerSwipeDetector.Down:
-                PlayerStateMachine.Instance.ChangeState(new SlidingState(_player, _animator, _playerCollider)); 
+                _stateMachine.ChangeState(new SlidingState(_player, _animator, _playerCollider, _stateMachine)); 
                 break;
                 case SwipeDetector.PlayerSwipeDetector.Left:
                 if (_controlLocked == "n" && _laneNum > -1)

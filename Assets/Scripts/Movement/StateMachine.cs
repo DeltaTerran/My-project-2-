@@ -1,18 +1,19 @@
 using System;
-using System.Timers;
-using UnityEditorInternal;
 using UnityEngine;
 
 public abstract class State
 {
+    
     protected GameObject player;
     protected Animator animator;
     protected CapsuleCollider collider;
-    public State(GameObject player, Animator animator, CapsuleCollider collider)
+    protected PlayerStateMachine stateMachine;
+    public State(GameObject player, Animator animator, CapsuleCollider collider, PlayerStateMachine stateMachine)
     {
         this.player = player;
         this.animator = animator;
         this.collider = collider;
+        this.stateMachine = stateMachine;
     }
     public virtual void Enter() { SwipeDetector.OnSwipe += HandleSwipe; }
 
@@ -31,7 +32,7 @@ public abstract class State
 #region States
 public class RunningState : State
 {
-    public RunningState(GameObject player, Animator animator, CapsuleCollider collider) : base(player, animator, collider) { }
+    public RunningState(GameObject player, Animator animator, CapsuleCollider collider, PlayerStateMachine stateMachine) : base(player, animator, collider, stateMachine) { }
 
 
 
@@ -45,17 +46,18 @@ public class RunningState : State
         base.Update();
         //if (player.transform.position.y <= 1f)
         //{
-        //    PlayerStateMachine.Instance.ChangeState(new RunningState(player, animator, collider));
+        //    stateMachine.ChangeState(new RunningState(player, animator, collider));
 
         //}
     }
 }
 public class JumpingState : State
 {
-    private float jumpDuration = 1.5f;
+    private float jumpDuration = 2.5f;
     private float elapsedTime = 0;
     //private bool isJumping = false;
-    public JumpingState(GameObject player, Animator animator, CapsuleCollider collider) : base(player, animator,collider) { }
+    public JumpingState(GameObject player, Animator animator, CapsuleCollider collider, PlayerStateMachine stateMachine) 
+        : base(player, animator, collider, stateMachine) { }
 
    
 
@@ -65,7 +67,7 @@ public class JumpingState : State
         //isJumping = true;
         animator.SetTrigger("JumpTr");
         SetCollider(2, new Vector3(0, 3.5f, 0)); // Меняем высоту и центр коллайдера
-        Debug.Log("Jumping started");
+        //Debug.Log("Jumping started");
     }
 
     public override void Update()
@@ -76,24 +78,24 @@ public class JumpingState : State
         //jumpDuration -= Time.deltaTime;
         //if (Input.GetKeyDown(KeyCode.DownArrow)) // Переход в кувырок
         //{
-        //    PlayerStateMachine.Instance.ChangeState(new JumpRollState(player, animator, collider));
+        //    stateMachine.ChangeState(new JumpRollState(player, animator, collider, st));
         //    return;
         //}
-        Debug.Log(elapsedTime);
+        //Debug.Log(elapsedTime);
         if (elapsedTime >= jumpDuration)
         {
             //isJumping = false;
-            PlayerStateMachine.Instance.ChangeState(new RunningState(player, animator, collider));
+            stateMachine.ChangeState(new RunningState(player, animator, collider, stateMachine));
         }
         //jumpDuration -= Time.deltaTime;
         //if (jumpDuration < 0)
         //{
         
-        //    PlayerStateMachine.Instance.ChangeState(new RunningState(player, animator, collider));
+        //    stateMachine.ChangeState(new RunningState(player, animator, collider));
         //}
         //if (player.transform.position.y <= 1f)
         //{
-        //    PlayerStateMachine.Instance.ChangeState(new RunningState(player, animator, collider));
+        //    stateMachine.ChangeState(new RunningState(player, animator, collider));
 
         //}
     }
@@ -101,7 +103,7 @@ public class JumpingState : State
     {
         if (direction == SwipeDetector.PlayerSwipeDetector.Down)
         {
-            PlayerStateMachine.Instance.ChangeState(new JumpSlideState(player, animator, collider));
+            stateMachine.ChangeState(new JumpSlideState(player, animator, collider, stateMachine));
         }
     } 
     public override void Exit()
@@ -117,16 +119,16 @@ public class JumpingState : State
 
 public class SlidingState : State
 {
-    private float slideDuration = 1.5f;
+    private float slideDuration = 2.5f;
     private float elapsedTime = 0f;
-    public SlidingState(GameObject player, Animator animator, CapsuleCollider collider) : base(player, animator, collider) { }
+    public SlidingState(GameObject player, Animator animator, CapsuleCollider collider, PlayerStateMachine stateMachine) : base(player, animator, collider, stateMachine) { }
 
     public override void Enter()
     {
         base.Enter();
         animator.SetTrigger("SlideTr");
         SetCollider(1, new Vector3(0, 0.5f, 0));
-        Debug.Log("Entered Sliding State");
+        //Debug.Log("Entered Sliding State");
     }
 
     public override void Update()
@@ -136,21 +138,21 @@ public class SlidingState : State
 
         //if (Input.GetKeyDown(KeyCode.UpArrow)) // Переход в прыжок
         //{
-        //    PlayerStateMachine.Instance.ChangeState(new JumpingState(player, animator, collider));
+        //    stateMachine.ChangeState(new JumpingState(player, animator, collider));
         //    return;
         //}
 
         // Завершаем кувырок
         if (elapsedTime >= slideDuration)
         {
-            PlayerStateMachine.Instance.ChangeState(new RunningState(player, animator, collider));
+            stateMachine.ChangeState(new RunningState(player, animator, collider, stateMachine));
         }
     }
     public override void HandleSwipe(SwipeDetector.PlayerSwipeDetector direction)
     {
         if (direction == SwipeDetector.PlayerSwipeDetector.Up)
         {
-            PlayerStateMachine.Instance.ChangeState(new JumpingState(player, animator, collider));
+            stateMachine.ChangeState(new JumpingState(player, animator, collider, stateMachine));
         }
     }
     public override void Exit()
@@ -159,14 +161,14 @@ public class SlidingState : State
         SetCollider(2, new Vector3(0, 1, 0)); // Возвращаем коллайдер в исходное состояние
         //moveorb.CanPlayAnimation = true;
         animator.ResetTrigger("SlideTr");
-        Debug.Log("Sliding ended");
+        //Debug.Log("Sliding ended");
 
     }
 }
 public class JumpSlideState : State
 {
     private float _rollDuration = 0.9f;
-    public JumpSlideState(GameObject player, Animator animator, CapsuleCollider collider) : base(player, animator, collider)
+    public JumpSlideState(GameObject player, Animator animator, CapsuleCollider collider, PlayerStateMachine stateMachine) : base(player, animator, collider, stateMachine)
     {
     }
 
@@ -187,7 +189,7 @@ public class JumpSlideState : State
         _rollDuration -= Time.deltaTime;
         if (_rollDuration <= 0)
         {
-            PlayerStateMachine.Instance.ChangeState(new RunningState(player, animator, collider));
+            stateMachine.ChangeState(new RunningState(player, animator, collider, stateMachine));
         }
 
     }
@@ -196,6 +198,7 @@ public class JumpSlideState : State
     {
         base.Exit();
         Debug.Log("ResetJumpSlide");
+       
         SetCollider(2, new Vector3(0, 1, 0));
         animator.ResetTrigger("JumpSlideTr");
     }

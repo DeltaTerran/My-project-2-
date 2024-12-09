@@ -56,8 +56,7 @@ public class RestartLvl : MonoBehaviour
 
     }
 
-
-
+    #region old Systems
     //void ClosesInterstitialAd()
     //{
     //    if (_interstitialAd != null)
@@ -155,6 +154,8 @@ public class RestartLvl : MonoBehaviour
     //                       "with error : " + error);
     //    };
     //}
+
+    #endregion
 
     public void RebornTM()
     {

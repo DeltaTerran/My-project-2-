@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using static UnityEditor.Experimental.GraphView.GraphView;
 
 public class SwipeDetector : MonoBehaviour
 {
@@ -9,7 +8,7 @@ public class SwipeDetector : MonoBehaviour
     private Vector2 _currentTouchPosition;
     private bool _stopTouch = false;
     private const float _swipeRange = 50;
-    private const float _tapRange = 10;
+    //private const float _tapRange = 10;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public enum PlayerSwipeDetector
     {
