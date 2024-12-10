@@ -86,6 +86,7 @@ public class AuthFB : MonoBehaviour
                 // Сохраняем дополнительные данные в Realtime Database
                 //SaveUsernameToDatabase(newUser.UserId, username);
             });
+            
             _autorization.SetActive(true);
             _registration.SetActive(false);
 
@@ -123,12 +124,12 @@ public class AuthFB : MonoBehaviour
         {
             if (task.IsCanceled)
             {
-                //Debug.LogError("Авторизация отменена.");
+                _wrongLabel.text = "Авторизация отменена.";
                 return;
             }
             if (task.IsFaulted)
             {
-                //Debug.LogError("Ошибка при авторизации: " + task.Exception);
+                _wrongLabel.text = "Неверный логин/пороль";
                 return;
             }
             

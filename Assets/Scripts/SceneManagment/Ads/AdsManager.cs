@@ -165,6 +165,10 @@ public class AdsManager : MonoBehaviour
     {
         ad.OnAdFullScreenContentClosed += () =>
         {
+
+            Outro.SetActive(false);
+            Gm.Unpause();
+            PlayerController.Speed = 5;
             //Debug.Log("Rewarded interstitial ad закрыт.");
             LoadRewardedInterstitialAd(); // ѕерезагрузка рекламы после закрыти€
             
