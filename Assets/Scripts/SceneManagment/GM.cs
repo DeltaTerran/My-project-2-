@@ -260,12 +260,12 @@ public class GM : MonoBehaviour
         if (FirebaseManager.Instance.Auth != null)
         {
             FirebaseManager.Instance.Auth.SignOut();
-            Debug.Log("Пользователь вышел из аккаунта.");
+            //Debug.Log("Пользователь вышел из аккаунта.");
 
         }
         else
         {
-            Debug.LogWarning("FirebaseAuth не инициализирован.");
+            //Debug.LogWarning("FirebaseAuth не инициализирован.");
         }
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex - 1);
     }

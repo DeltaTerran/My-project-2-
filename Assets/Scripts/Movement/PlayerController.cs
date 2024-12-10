@@ -35,7 +35,8 @@ public class PlayerController : MonoBehaviour
 
     #region Animator
     private Animator _animator;
-    //public static bool CanPlayAnimation = true;
+    public static bool CanPlayAnimation = true;
+    public static bool JumpSliding = false;
     //private bool isJumping = false;
     //private bool isRolling = false;
     #endregion
@@ -51,9 +52,9 @@ public class PlayerController : MonoBehaviour
     public static float Timer = 0f;
     public static float DelayAmount = 1;
     public static float MaxSpeed = 10;
-    public static Vector3 _deathPos;
+    public static Vector3 DeathPos;
     private float _laneWidth = 1f;
-    public static bool _isDead = false;
+    public static bool IsDead = false;
     //public float HorizVel = 0;
     #endregion
     
@@ -63,6 +64,7 @@ public class PlayerController : MonoBehaviour
         //_playerCollider = _player.GetComponent<CapsuleCollider>();
         //_playerRigidbody = _player.GetComponent<Rigidbody>();
         //_gM = GameManager.GetComponent<GM>();
+       
         _animator = GetComponentInChildren<Animator>();
         _stateMachine.ChangeState(new RunningState(_player, _animator, _playerCollider, _stateMachine));
 
@@ -280,12 +282,7 @@ public class PlayerController : MonoBehaviour
         transform.position = new Vector3(_laneNum, Player_Transform.position.y, Player_Transform.position.z);
     }
     
-    public IEnumerator IFrames()
-    {
-        _playerCollider.enabled = false;
-        yield return new WaitForSeconds(.9f);
-        _playerCollider.enabled = true;
-    }
+    
     #endregion
     private void AccelerateSpeed()
     {
@@ -312,11 +309,11 @@ public class PlayerController : MonoBehaviour
                 Destroy(other.gameObject);
                 Destroy(gameObject);
                 GM.ZVelAdj = 0;
-                _deathPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
+                DeathPos = new Vector3(transform.position.x, transform.position.y + 0.1f, transform.position.z);
                 _stateMachine.ChangeState(new RunningState(_player,_animator,_playerCollider, _stateMachine));
-                _animator.ResetTrigger("JumpTr");
+                //_animator.ResetTrigger("JumpTr");
                 _animator.ResetTrigger("SlideTr");
-                _animator.ResetTrigger("JumpSlideTr");
+                //_animator.ResetTrigger("JumpSlideTr");
                 //Instantiate(boomObj, _deathPos, boomObj.rotation);
                 _gM.LvlCompStatus = "Fail";
                 _gM.IsDead = true;
@@ -342,10 +339,18 @@ public class PlayerController : MonoBehaviour
         switch (direction)
         {
             case SwipeDetector.PlayerSwipeDetector.Up:
-                _stateMachine.ChangeState(new JumpingState(_player, _animator, _playerCollider, _stateMachine));
+                if (CanPlayAnimation)
+                {
+                    _stateMachine.ChangeState(new JumpingState(_player, _animator, _playerCollider, _stateMachine));
+                    CanPlayAnimation = false;
+                }
                 break;
                 case SwipeDetector.PlayerSwipeDetector.Down:
-                _stateMachine.ChangeState(new SlidingState(_player, _animator, _playerCollider, _stateMachine)); 
+                if (CanPlayAnimation)
+                {
+                    _stateMachine.ChangeState(new SlidingState(_player, _animator, _playerCollider, _stateMachine));
+                    CanPlayAnimation = false;
+                }
                 break;
                 case SwipeDetector.PlayerSwipeDetector.Left:
                 if (_controlLocked == "n" && _laneNum > -1)

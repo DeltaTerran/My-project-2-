@@ -2698,12 +2698,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7ff3d3092eb550e4fba5b40ebee1eab8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _player: {fileID: 1249966688}
-  _playerReplacement: {fileID: 1744669957}
   _camera: {fileID: 1084443241}
   _rebornbutton: {fileID: 1596919297}
   _gameManager: {fileID: 528339367}
   _outroUI: {fileID: 826085787}
+  _playerReplacement: {fileID: 1744669957}
+  Destroyer: {fileID: 738803585}
+  _playerReplacementController: {fileID: 1744669964}
+  _playerReplacementCollider: {fileID: 1744669958}
+  _playerReplacementStateMachine: {fileID: 1744669960}
+  _playerReplacementSwipeDetector: {fileID: 1744669963}
 --- !u!4 &826085789
 Transform:
   m_ObjectHideFlags: 0
@@ -3535,20 +3539,32 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2495914963020416679, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: rb
       value: 
       objectReference: {fileID: 1744669959}
     - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+      propertyPath: _gM
+      value: 
+      objectReference: {fileID: 528339368}
+    - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: _player
       value: 
       objectReference: {fileID: 1744669957}
     - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: GameManager
       value: 
       objectReference: {fileID: 528339367}
+    - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+      propertyPath: _stateMachine
+      value: 
+      objectReference: {fileID: 1744669960}
     - target: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: _playerCollider
       value: 
@@ -3569,6 +3585,10 @@ PrefabInstance:
       propertyPath: player_rigidbody
       value: 
       objectReference: {fileID: 1744669959}
+    - target: {fileID: 5551733088689164536, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7428194201355376078, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
       propertyPath: m_LocalPosition.x
       value: 500
@@ -4668,7 +4688,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744669957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 5e7120838726011459f8fe9aec088a5b, type: 3}
   m_Name: 
@@ -4685,9 +4705,20 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1744669957}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ee4120252cf6a1849980b43ede3c7ac0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1744669964 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3339386484728829443, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+  m_PrefabInstance: {fileID: 1156584274}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1744669957}
+  m_Enabled: 0
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87176f7bd38972f4e8466316e9b239d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1 &1822682873
@@ -5859,6 +5890,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8341753120914869588, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
+      propertyPath: m_AnimatePhysics
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 5629879591940813420, guid: cb6889d223e804c419be3ecbf359a230, type: 3}
     m_RemovedGameObjects: []
@@ -5889,7 +5924,7 @@ SceneRoots:
   - {fileID: 1643224663}
   - {fileID: 2144980995}
   - {fileID: 826085789}
+  - {fileID: 1156584274}
   - {fileID: 814616481}
   - {fileID: 904374477}
   - {fileID: 2013386419}
-  - {fileID: 1156584274}

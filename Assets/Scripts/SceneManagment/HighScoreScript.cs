@@ -50,7 +50,7 @@ public class HighScoreScript : MonoBehaviour
             }
             else
             {
-                Debug.LogError("Failed to load leaderboard: " + task.Exception);
+                //Debug.LogError("Failed to load leaderboard: " + task.Exception);
             }
 
         });

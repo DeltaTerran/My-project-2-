@@ -40,11 +40,11 @@ public class FirebaseManager : MonoBehaviour
                 Auth = FirebaseAuth.DefaultInstance;
                 Database = FirebaseDatabase.DefaultInstance;
                 dbReference = FirebaseDatabase.DefaultInstance.RootReference;
-                Debug.Log("Firebase initialized successfully!");
+                //Debug.Log("Firebase initialized successfully!");
             }
             else
             {
-                Debug.LogError($"Could not resolve all Firebase dependencies: {dependencyStatus}");
+                //Debug.LogError($"Could not resolve all Firebase dependencies: {dependencyStatus}");
             }
         });
     }
@@ -60,12 +60,12 @@ public class FirebaseManager : MonoBehaviour
                 {
                     string name = child.Child("name").Value.ToString();
                     int score = int.Parse(child.Child("score").Value.ToString());
-                    Debug.Log($"Name: {name}, Score: {score}");
+                    //Debug.Log($"Name: {name}, Score: {score}");
                 }
             }
             else
             {
-                Debug.LogError("Failed to load leaderboard: " + task.Exception);
+                //Debug.LogError("Failed to load leaderboard: " + task.Exception);
             }
 
         });
@@ -74,12 +74,12 @@ public class FirebaseManager : MonoBehaviour
     {
         if (string.IsNullOrEmpty(userId) || string.IsNullOrEmpty(name))
         {
-            Debug.LogError("User ID or name is null or empty!");
+            //Debug.LogError("User ID or name is null or empty!");
             return;
         }
         if (dbReference == null)
         {
-            Debug.LogError("Database reference is not initialized!");
+            //Debug.LogError("Database reference is not initialized!");
             return;
         }
 
@@ -87,11 +87,11 @@ public class FirebaseManager : MonoBehaviour
         {
             if (task.IsCompleted)
             {
-                Debug.Log("Player added to leaderboard.");
+                //Debug.Log("Player added to leaderboard.");
             }
             else
             {
-                Debug.LogError("Failed to add player: " + task.Exception);
+               // Debug.LogError("Failed to add player: " + task.Exception);
             }
         });
     }

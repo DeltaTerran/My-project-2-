@@ -61,15 +61,15 @@ public class AuthFB : MonoBehaviour
             }
             if (task.IsCanceled)
             {
-                Debug.LogError("Регистрация отменена.");
+                //Debug.LogError("Регистрация отменена.");
                 return;
             }
             if (task.IsFaulted)
             {
-                Debug.LogError("Ошибка при регистрации: " + task.Exception);
+                //Debug.LogError("Ошибка при регистрации: " + task.Exception);
                 return;
             }
-            Debug.Log("Пользователь создан");
+            //Debug.Log("Пользователь создан");
 
             AuthResult authResult = task.Result;
             FirebaseUser newUser = authResult.User;
@@ -79,7 +79,7 @@ public class AuthFB : MonoBehaviour
             {
                 if (updateTask.IsCanceled || updateTask.IsFaulted)
                 {
-                    Debug.LogError("Ошибка обновления профиля: " + updateTask.Exception);
+                    //Debug.LogError("Ошибка обновления профиля: " + updateTask.Exception);
                     return;
                 }
 
@@ -123,17 +123,17 @@ public class AuthFB : MonoBehaviour
         {
             if (task.IsCanceled)
             {
-                Debug.LogError("Авторизация отменена.");
+                //Debug.LogError("Авторизация отменена.");
                 return;
             }
             if (task.IsFaulted)
             {
-                Debug.LogError("Ошибка при авторизации: " + task.Exception);
+                //Debug.LogError("Ошибка при авторизации: " + task.Exception);
                 return;
             }
             
             
-            Debug.Log("Пользователь авторизован");
+            //Debug.Log("Пользователь авторизован");
             //SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
             SceneManager.LoadScene("Game");
 

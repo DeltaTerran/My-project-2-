@@ -9,7 +9,8 @@ public class AdsManager : MonoBehaviour
     private string _adUnitId = "ca-app-pub-3940256099942544/5354046379";
     public RewardedInterstitialAd RewardedInterstitialAd;
     public static AdsManager Instance;
-    public RestartLvl RestartLvL;
+    public GM Gm;
+    public GameObject Outro;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -31,7 +32,7 @@ public class AdsManager : MonoBehaviour
     {
         MobileAds.Initialize(initStatus =>
         {
-            Debug.Log("AdMob SDK инициализирован");
+            //Debug.Log("AdMob SDK инициализирован");
         });
         LoadRewardedInterstitialAd();
     }
@@ -44,7 +45,7 @@ public class AdsManager : MonoBehaviour
             RewardedInterstitialAd = null;
         }
 
-        Debug.Log("Loading the interstitial ad.");
+        //Debug.Log("Loading the interstitial ad.");
         var adRequest = new AdRequest();
         RewardedInterstitialAd.Load(_adUnitId, adRequest, (RewardedInterstitialAd ad, LoadAdError error) =>
         {
@@ -52,13 +53,13 @@ public class AdsManager : MonoBehaviour
             if (error != null || ad == null)
             {
 
-                Debug.LogError("interstitial ad failed to load an ad with error : " + error);
+                //Debug.LogError("interstitial ad failed to load an ad with error : " + error);
 
                 return;
             }
 
-            Debug.Log("Interstitial ad loaded with response : "
-                      + ad.GetResponseInfo());
+            //Debug.Log("Interstitial ad loaded with response : "
+            //          + ad.GetResponseInfo());
 
             RewardedInterstitialAd = ad;
             RegisterEventHandlers(RewardedInterstitialAd);
@@ -69,17 +70,20 @@ public class AdsManager : MonoBehaviour
     {
         if (RewardedInterstitialAd != null && RewardedInterstitialAd.CanShowAd())
         {
-            Debug.Log("Showing interstitial ad.");
+            //Debug.Log("Showing interstitial ad.");
             RewardedInterstitialAd.Show((Reward reward) =>
             {
-                RestartLvL.RebornTM();
+                Outro.SetActive(false);
+                Gm.Unpause();
+                PlayerController.Speed = 5;
+
                 //Debug.Log($"ѕользователь получил награду: {reward.Amount} {reward.Type}");
 
             });
         }
         else
         {
-            Debug.LogError("Interstitial ad is not ready yet.");
+            //Debug.LogError("Interstitial ad is not ready yet.");
         }
         //LoadInterstitialAd();
     }
@@ -92,7 +96,7 @@ public class AdsManager : MonoBehaviour
         }
         else
         {
-            Debug.Log("Ѕаннер не существует или уже был закрыт.");
+            //Debug.Log("Ѕаннер не существует или уже был закрыт.");
         }
     }
 
@@ -161,28 +165,29 @@ public class AdsManager : MonoBehaviour
     {
         ad.OnAdFullScreenContentClosed += () =>
         {
-            Debug.Log("Rewarded interstitial ad закрыт.");
+            //Debug.Log("Rewarded interstitial ad закрыт.");
             LoadRewardedInterstitialAd(); // ѕерезагрузка рекламы после закрыти€
+            
         };
 
         ad.OnAdFullScreenContentFailed += (AdError error) =>
         {
-            Debug.LogError($"Rewarded interstitial ad не смог открыть полноэкранный контент: {error}");
+            //Debug.LogError($"Rewarded interstitial ad не смог открыть полноэкранный контент: {error}");
         };
 
         ad.OnAdImpressionRecorded += () =>
         {
-            Debug.Log("Rewarded interstitial ad записал показ.");
+            //Debug.Log("Rewarded interstitial ad записал показ.");
         };
 
         ad.OnAdClicked += () =>
         {
-            Debug.Log("Rewarded interstitial ad был нажат.");
+            //Debug.Log("Rewarded interstitial ad был нажат.");
         };
 
         ad.OnAdPaid += (AdValue adValue) =>
         {
-            Debug.Log($"Rewarded interstitial ad заработал {adValue.Value} {adValue.CurrencyCode}.");
+            //Debug.Log($"Rewarded interstitial ad заработал {adValue.Value} {adValue.CurrencyCode}.");
         };
     }
 

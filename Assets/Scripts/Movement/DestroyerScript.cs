@@ -1,6 +1,7 @@
 using UnityEngine;
 
-public class DestroyerCollider : MonoBehaviour
+
+class DestroyerCollider : MonoBehaviour
 {
     private bool _isMaxed = false;
     private Rigidbody _destroyer_rigidbody;

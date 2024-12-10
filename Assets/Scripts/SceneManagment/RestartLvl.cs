@@ -4,6 +4,7 @@ using GoogleMobileAds.Api;
 using System;
 using Unity.VisualScripting;
 using Unity.Cinemachine;
+using System.Collections;
 #region Коменты
 //void RequestInterstitial()
 //{
@@ -35,13 +36,19 @@ using Unity.Cinemachine;
 #endregion
 public class RestartLvl : MonoBehaviour
 {
-    [SerializeField] GameObject _player, _playerReplacement;
+
     //[SerializeField] GameObject ;
     //private InterstitialAd _interstitialAd;
     [SerializeField] GameObject _camera;
     [SerializeField] GameObject _rebornbutton;
     [SerializeField] GameObject _gameManager;
     [SerializeField] GameObject _outroUI;
+    [SerializeField] GameObject _playerReplacement, Destroyer;
+    [SerializeField] PlayerController _playerReplacementController;
+    [SerializeField] CapsuleCollider _playerReplacementCollider;
+    [SerializeField] PlayerStateMachine _playerReplacementStateMachine;
+    [SerializeField] SwipeDetector _playerReplacementSwipeDetector;
+
 
     GM _gM;
     //bool _isReborn = false;
@@ -51,7 +58,9 @@ public class RestartLvl : MonoBehaviour
         _gM = _gameManager.GetComponent<GM>();
         //MobileAds.Initialize(initStatus =>{});
         //LoadInterstitialAd();
-        AdsManager.Instance.RestartLvL = _outroUI.GetComponent<RestartLvl>();
+        AdsManager.Instance.Gm = _gM;
+        AdsManager.Instance.Outro = _outroUI;
+
 
 
     }
@@ -171,9 +180,13 @@ public class RestartLvl : MonoBehaviour
 
         //_gM.ResetGMValues();
         //moveorb.ResetMVValues();
-        _outroUI.SetActive(false);
+
+
         //Debug.Log(567);
-        _playerReplacement.transform.position = PlayerController._deathPos;
+        //_playerReplacement.transform.position = PlayerController._deathPos;
+        _playerReplacement.transform.position = new Vector3(PlayerController.DeathPos.x, PlayerController.DeathPos.y, PlayerController.DeathPos.z - 7);
+
+        Destroyer.transform.position = new Vector3(0, 0, PlayerController.DeathPos.z - 80);
         //GameObject _playerprefab = Instantiate(_player, moveorb._deathPos, _player.transform.rotation);
         //if (_playerprefab == null)
         //{
@@ -197,14 +210,24 @@ public class RestartLvl : MonoBehaviour
         //_camera.GetComponent<CinemachineCamera>().Target.TrackingTarget = _playerprefab.transform;
         //player = 
         _playerReplacement.SetActive(true);
+        //_playerReplacementCollider.enabled = true;
+        //StartCoroutine(IFrames());
+        _playerReplacementCollider.enabled = true;
+        _playerReplacementController.enabled = true;
+        _playerReplacementSwipeDetector.enabled = true;
+        _playerReplacementStateMachine.enabled = true;
+        
         _camera.GetComponent<CinemachineCamera>().Target.TrackingTarget = _playerReplacement.transform;
         
+
         //_playerprefab.GetComponent<moveorb>().GameManager = GameObject.Find("GM");
 
         _gM.Unpause();
     }
     #region Buttons
-    public void RestartLevel()
+    
+    
+    void RestartLevel()
     {
         PlayerController.ResetMVValues();
         _gM.ResetGMValues();
@@ -213,20 +236,23 @@ public class RestartLvl : MonoBehaviour
     }
     public void Reborn()
     {
-            if (AdsManager.Instance.RewardedInterstitialAd != null)
-            {
-                AdsManager.Instance.ShowRewardedInterstitialAd();
-            
-                _rebornbutton.SetActive(false);
-            }
-            else
-            {
-                AdsManager.Instance.LoadRewardedInterstitialAd();
-            }
-    }
+        if (AdsManager.Instance.RewardedInterstitialAd != null)
+        {
+            AdsManager.Instance.ShowRewardedInterstitialAd();
 
-        
-        
+            _rebornbutton.SetActive(false);
+            RebornTM();
+            _gM.Pause();
+        }
+        else
+        {
+            AdsManager.Instance.LoadRewardedInterstitialAd();
+        }
+    }
 }
+
+   
+        
+    
     #endregion
 
