@@ -50,7 +50,7 @@ public class FirebaseManager : MonoBehaviour
     }
     public void LoadLeaderboard()
     {
-        FirebaseManager.Instance.dbReference.Child("leaderboard").OrderByChild("score").LimitToLast(10).GetValueAsync().ContinueWithOnMainThread(task =>
+        Instance.dbReference.Child("leaderboard").OrderByChild("score").LimitToLast(10).GetValueAsync().ContinueWithOnMainThread(task =>
         {
             if (task.IsCompleted)
             {
@@ -83,19 +83,36 @@ public class FirebaseManager : MonoBehaviour
             return;
         }
 
-        dbReference.Child("leaderboard").Child(userId).SetRawJsonValueAsync(JsonUtility.ToJson(new PlayerData(name, score))).ContinueWithOnMainThread(task =>
+        //dbReference.Child("leaderboard").Child(userId).SetRawJsonValueAsync(JsonUtility.ToJson(new PlayerData(name, score))).ContinueWithOnMainThread(task =>
+        dbReference.Child("leaderboard").Child(userId).GetValueAsync().ContinueWithOnMainThread(task =>
         {
+            DataSnapshot snapshot = task.Result;
             if (task.IsCompleted)
             {
-                //Debug.Log("Player added to leaderboard.");
+                int currentScore = int.Parse(snapshot.Child("score").Value.ToString());
+                if (score > currentScore) 
+                {
+                    UpdateLeaderboardEntry(userId, name, score);
+                }
             }
             else
             {
-               // Debug.LogError("Failed to add player: " + task.Exception);
+                UpdateLeaderboardEntry(userId, name, score);
             }
         });
     }
-    
+
+    private void UpdateLeaderboardEntry(string userId, string name, int score)
+    {
+        PlayerData playerData = new PlayerData(name, score);
+        string json = JsonUtility.ToJson(playerData);
+
+        dbReference.Child("leaderboard").Child(userId).SetRawJsonValueAsync(json).ContinueWithOnMainThread(task =>
+        {
+
+        });
+    }
+
     class PlayerData
     {
         public string name;

@@ -15,6 +15,8 @@ public class HighScoreScript : MonoBehaviour
         float templateHight = 20f;
         int number = 0;
         entryTemplate.gameObject.SetActive(false);
+
+
         //for (int i = 0; i < 10; i++)
         //{
         //    Transform entryTransform = Instantiate(entryTemplate, entryContainer);
@@ -24,6 +26,8 @@ public class HighScoreScript : MonoBehaviour
 
         //    //entryTransform.Find("NameLabel").GetComponent<TMP_Text>().text = i.ToString();
         //}
+
+
         FirebaseManager.Instance.dbReference.Child("leaderboard").OrderByChild("score").LimitToLast(10).GetValueAsync().ContinueWithOnMainThread(task =>
         {
             if (task.IsCompleted)
@@ -33,6 +37,10 @@ public class HighScoreScript : MonoBehaviour
                 foreach (DataSnapshot child in snapshot.Children)
                 {
                     string name = child.Child("name").Value.ToString();
+                    if (name.Length > 6)
+                    {
+                        name = name.Substring(6).ToLower() + "...";
+                    }
                     int score = int.Parse(child.Child("score").Value.ToString());
                     number++;
 
