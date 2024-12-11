@@ -33,12 +33,9 @@ public class SwipeDetector : MonoBehaviour
                     break;
 
                 case TouchPhase.Moved:
-                    _currentTouchPosition = touch.position;
-                    break;
-
-                case TouchPhase.Ended:
                     if (!_stopTouch)
                     {
+                        _currentTouchPosition = touch.position;
                         Vector2 swipeDelta = _currentTouchPosition - _startTouchPosition;
 
                         if (swipeDelta.magnitude > _swipeRange)
@@ -48,6 +45,22 @@ public class SwipeDetector : MonoBehaviour
                             OnSwipe?.Invoke(direction); // Генерируем событие свайпа
                         }
                     }
+                    
+                    break;
+
+                case TouchPhase.Ended:
+                    //if (!_stopTouch)
+                    //{
+                    //    Vector2 swipeDelta = _currentTouchPosition - _startTouchPosition;
+
+                    //    if (swipeDelta.magnitude > _swipeRange)
+                    //    {
+                    //        _stopTouch = true;
+                    //        PlayerSwipeDetector direction = DetectSwipeDirection(swipeDelta);
+                    //        OnSwipe?.Invoke(direction); // Генерируем событие свайпа
+                    //    }
+                    //}
+                    _stopTouch = true;
                     break;
             }
         }    

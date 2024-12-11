@@ -11,6 +11,8 @@ public class AdsManager : MonoBehaviour
     public static AdsManager Instance;
     public GM Gm;
     public GameObject Outro;
+    public RestartLvl RestartLvl;
+    private bool _rewardGoted = false;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Awake()
@@ -75,6 +77,7 @@ public class AdsManager : MonoBehaviour
             {
                 Outro.SetActive(false);
                 Gm.Unpause();
+                _rewardGoted = true;
                 PlayerController.Speed = 5;
 
                 //Debug.Log($"ѕользователь получил награду: {reward.Amount} {reward.Type}");
@@ -166,10 +169,12 @@ public class AdsManager : MonoBehaviour
         ad.OnAdFullScreenContentClosed += () =>
         {
 
-            Outro.SetActive(false);
-            Gm.Unpause();
-            PlayerController.Speed = 5;
-            //Debug.Log("Rewarded interstitial ad закрыт.");
+            if (!_rewardGoted)
+            {
+                RestartLvl.RestartLevel();
+                Outro.SetActive(false);
+            }
+            _rewardGoted = false;
             LoadRewardedInterstitialAd(); // ѕерезагрузка рекламы после закрыти€
             
         };

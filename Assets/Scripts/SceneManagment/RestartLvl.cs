@@ -60,6 +60,7 @@ public class RestartLvl : MonoBehaviour
         //LoadInterstitialAd();
         AdsManager.Instance.Gm = _gM;
         AdsManager.Instance.Outro = _outroUI;
+        AdsManager.Instance.RestartLvl = _outroUI.GetComponent < RestartLvl>();
 
 
 
@@ -227,7 +228,7 @@ public class RestartLvl : MonoBehaviour
     #region Buttons
     
     
-    void RestartLevel()
+    public void RestartLevel()
     {
         PlayerController.ResetMVValues();
         _gM.ResetGMValues();
