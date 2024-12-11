@@ -95,7 +95,8 @@ public class FirebaseManager : MonoBehaviour
             }
         });
     }
-    public class PlayerData
+    
+    class PlayerData
     {
         public string name;
         public int score;

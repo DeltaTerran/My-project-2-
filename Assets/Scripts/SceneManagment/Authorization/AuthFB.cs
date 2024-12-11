@@ -61,7 +61,7 @@ public class AuthFB : MonoBehaviour
             }
             if (task.IsCanceled)
             {
-                //Debug.LogError("Регистрация отменена.");
+                _wrongLabel.text = "Аккаунт с такими данными уже существует";
                 return;
             }
             if (task.IsFaulted)
@@ -129,7 +129,7 @@ public class AuthFB : MonoBehaviour
             }
             if (task.IsFaulted)
             {
-                _wrongLabel.text = "Неверный логин/пороль";
+                _wrongLabel.text = "Неверный логин/пароль";
                 return;
             }
             
