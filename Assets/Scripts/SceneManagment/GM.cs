@@ -234,7 +234,7 @@ public class GM : MonoBehaviour
             _gameUI.SetActive(true);
             _pauseUI.SetActive(false);
             _mainMenuUI.SetActive(false);
-            //_leaderboardUI.SetActive(false);
+            _leaderboardUI.SetActive(false);
         }
     }
 

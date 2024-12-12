@@ -7,11 +7,12 @@ using Firebase.Auth;
 using Firebase.Extensions;
 using Firebase.Database;
 using System.Collections.Generic;
+using System.Collections;
 
 public class AuthFB : MonoBehaviour
 {
     [SerializeField]
-    GameObject _autorization, _registration;
+    GameObject _autorization, _registration, _loadingscreen;
     [SerializeField]
     TMP_InputField _usernamefield, _emailfield, _passwordfield, _conformpassword;
     [SerializeField] TMP_Text _wrongLabel;
@@ -20,6 +21,21 @@ public class AuthFB : MonoBehaviour
 
     void Start()
     {
+        StartCoroutine(WaitForFirebaseInitialization());
+
+        //if (FirebaseManager.Instance !=null)
+        //{
+        //    Debug.Log("Firebase exists");
+        //}
+        //if (FirebaseManager.Instance.Auth.CurrentUser != null)
+        //{
+        //    Debug.Log("User already logged in");
+        //    SceneManager.LoadScene("Game");
+        //}
+        //else
+        //{
+        //    _autorization.SetActive(true);
+        //}
 
         //FirebaseApp.CheckAndFixDependenciesAsync().ContinueWith(task =>
         //{
@@ -152,7 +168,7 @@ public class AuthFB : MonoBehaviour
         _autorization.SetActive(true);
         _registration.SetActive(false);
     }
-    
+
     //public void GetUserName(string userID)
     //{
     //    _databaseReference.Child("users").Child(userID).GetValueAsync().ContinueWith(task =>
@@ -175,4 +191,22 @@ public class AuthFB : MonoBehaviour
     //        }
     //    });
     //}
+    private IEnumerator WaitForFirebaseInitialization()
+    {
+        while (!FirebaseManager.Instance.IsInitialized)
+        {
+            yield return null; // ∆дЄм следующего кадра, пока FirebaseManager не завершит инициализацию
+        }
+
+        if (FirebaseManager.Instance.Auth.CurrentUser != null)
+        {
+            Debug.Log("User already logged in");
+            SceneManager.LoadScene("Game");
+        }
+        else
+        {
+            _autorization.SetActive(true);
+            _loadingscreen.SetActive(false);
+        }
+    }
 }

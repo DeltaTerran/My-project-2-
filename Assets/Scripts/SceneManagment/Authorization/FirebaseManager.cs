@@ -4,7 +4,6 @@ using Firebase.Auth;
 using Firebase.Database;
 using System;
 using Firebase.Extensions;
-using static GM;
 public class FirebaseManager : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -13,6 +12,7 @@ public class FirebaseManager : MonoBehaviour
 
     public DatabaseReference dbReference { get; private set; }
     public FirebaseDatabase Database { get; private set; }
+    public bool IsInitialized { get; private set; } = false;
 
     void Awake()
     {
@@ -37,16 +37,31 @@ public class FirebaseManager : MonoBehaviour
             var dependencyStatus = task.Result;
             if (dependencyStatus == DependencyStatus.Available)
             {
+
                 Auth = FirebaseAuth.DefaultInstance;
                 Database = FirebaseDatabase.DefaultInstance;
                 dbReference = FirebaseDatabase.DefaultInstance.RootReference;
+                IsInitialized = true;
                 //Debug.Log("Firebase initialized successfully!");
+                CheckLoggedInUser();
             }
             else
             {
                 //Debug.LogError($"Could not resolve all Firebase dependencies: {dependencyStatus}");
             }
         });
+    }
+    private void CheckLoggedInUser()
+    {
+        FirebaseUser currentUser = Auth.CurrentUser;
+        if (currentUser != null)
+        {
+            //Debug.Log($"User already logged in: {currentUser.Email}");
+        }
+        else
+        {
+            //Debug.Log("No user is logged in.");
+        }
     }
     public void LoadLeaderboard()
     {
