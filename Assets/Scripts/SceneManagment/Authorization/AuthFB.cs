@@ -51,22 +51,23 @@ public class AuthFB : MonoBehaviour
         {
             if (password != conformpassword)
             {
-                _wrongLabel.text = "Пароли не совпадают";
+                _wrongLabel.text = "Passwords are not the same";
                 return;
             }
             if (password.Length < 6)
             {
-                _wrongLabel.text = "Пароль сликом короток";
+                _wrongLabel.text = "Password is too weak";
                 return;
             }
             if (task.IsCanceled)
             {
-                _wrongLabel.text = "Аккаунт с такими данными уже существует";
+                _wrongLabel.text = "Account with this email already exists";
                 return;
             }
             if (task.IsFaulted)
             {
                 //Debug.LogError("Ошибка при регистрации: " + task.Exception);
+                _wrongLabel.text = "Email is badly formated";
                 return;
             }
             //Debug.Log("Пользователь создан");
@@ -129,7 +130,7 @@ public class AuthFB : MonoBehaviour
             }
             if (task.IsFaulted)
             {
-                _wrongLabel.text = "Неверный логин/пароль";
+                _wrongLabel.text = "Username/Password is Incorrect";
                 return;
             }
             

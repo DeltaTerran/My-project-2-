@@ -14,6 +14,7 @@ public class GM : MonoBehaviour
 {
     [SerializeField] private GameObject _mainMenuUI, _gameUI, _outroUI, _leaderboardUI, _pauseUI;
     [SerializeField] private TMP_Text _gameT, _outroT;
+    //[SerializeField] private HighScoreScript score;
     private bool _isPaused;
     public bool AddedtoLB = false;
     public bool IsDead = false;
@@ -27,7 +28,6 @@ public class GM : MonoBehaviour
     public static float ZVelAdj = 1;
 
     public string LvlCompStatus = "";
-    public int RandNum;
 
 
     void Start()
@@ -276,6 +276,7 @@ public class GM : MonoBehaviour
     public void LeaderBoardButton()
     {
         _mainMenuUI.SetActive(false);
+        //score.Leaderboard();
         _leaderboardUI.SetActive(true);
     }
     public void BoBackFromLeaderBoardButton()

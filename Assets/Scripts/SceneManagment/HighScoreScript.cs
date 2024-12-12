@@ -1,59 +1,38 @@
+using System.Collections.Generic;
 using Firebase.Database;
 using Firebase.Extensions;
+using NUnit.Framework;
 using TMPro;
 using UnityEngine;
 
 public class HighScoreScript : MonoBehaviour
 {
-    private Transform entryContainer;
-    private Transform entryTemplate;
-
-    private void Awake()
+    [SerializeField] private HighScoreEntry _highScoreEntryPrefab;
+    [SerializeField] private Transform _container;
+    void Start()
     {
-        entryContainer = transform.Find("HighScoreEntryContainer");
-        entryTemplate = entryContainer.Find("HighScoreEntryTemplate");
-        float templateHight = 20f;
-        int number = 0;
-        entryTemplate.gameObject.SetActive(false);
-
-
-        //for (int i = 0; i < 10; i++)
-        //{
-        //    Transform entryTransform = Instantiate(entryTemplate, entryContainer);
-        //    RectTransform entryRectTransform = entryTransform.GetComponent<RectTransform>();
-        //    entryRectTransform.anchoredPosition = new Vector2(0, -templateHight * i);
-        //    entryTransform.gameObject.SetActive(true);
-
-        //    //entryTransform.Find("NameLabel").GetComponent<TMP_Text>().text = i.ToString();
-        //}
-
-
+        
         FirebaseManager.Instance.dbReference.Child("leaderboard").OrderByChild("score").LimitToLast(10).GetValueAsync().ContinueWithOnMainThread(task =>
         {
             if (task.IsCompleted)
             {
                 DataSnapshot snapshot = task.Result;
-
+                List<KeyValuePair<string, int>> highScores = new List<KeyValuePair<string, int>>();
                 foreach (DataSnapshot child in snapshot.Children)
                 {
                     string name = child.Child("name").Value.ToString();
-                    if (name.Length > 6)
-                    {
-                        name = name.Substring(6).ToLower() + "...";
-                    }
                     int score = int.Parse(child.Child("score").Value.ToString());
-                    number++;
+                    highScores.Add(new KeyValuePair<string, int>(name, score));
+                    //var highScoreEntry = Instantiate(_highScoreEntryPrefab, _container);
+                    //highScoreEntry.Initialize(name, score);
 
-                    Transform entryTransform = Instantiate(entryTemplate, entryContainer);
-                    RectTransform entryRectTransform = entryTransform.GetComponent<RectTransform>();
-                    entryRectTransform.anchoredPosition = new Vector2(0, -templateHight * number);
-                    entryTransform.gameObject.SetActive(true);
+                }
+                highScores.Sort((x, y) => y.Value.CompareTo(x.Value));
 
-
-                    entryTransform.Find("NameLabel").GetComponent<TMP_Text>().text = name;
-                    entryTransform.Find("ScoreLabel").GetComponent<TMP_Text>().text = score.ToString();
-                    
-
+                foreach (var entry in highScores)
+                {
+                    var highScoreEntry = Instantiate(_highScoreEntryPrefab, _container);
+                    highScoreEntry.Initialize(entry.Key, entry.Value);
                 }
             }
             else
@@ -63,5 +42,6 @@ public class HighScoreScript : MonoBehaviour
 
         });
 
+        
     }
 }

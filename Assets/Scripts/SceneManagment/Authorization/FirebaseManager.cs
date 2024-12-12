@@ -89,15 +89,19 @@ public class FirebaseManager : MonoBehaviour
             DataSnapshot snapshot = task.Result;
             if (task.IsCompleted)
             {
-                int currentScore = int.Parse(snapshot.Child("score").Value.ToString());
-                if (score > currentScore) 
+                if (snapshot.Exists)
+                {
+                    int currentScore = int.Parse(snapshot.Child("score").Value.ToString());
+                    if (score > currentScore)
+                    {
+                        UpdateLeaderboardEntry(userId, name, score);
+                    }
+                }
+                else
                 {
                     UpdateLeaderboardEntry(userId, name, score);
                 }
-            }
-            else
-            {
-                UpdateLeaderboardEntry(userId, name, score);
+                
             }
         });
     }
